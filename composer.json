@@ -1,8 +1,8 @@
 {
     "name": "philiplb/crudlexuser",
     "type": "library",
-    "description": "This is a library offering an user provider for symfony/security.",
-    "keywords": ["silex", "crud", "admin generator", "symfony security", "security"],
+    "description": "CRUDlexUser is a library offering an user provider for symfony/security.",
+    "keywords": ["silex", "crud", "user management", "symfony security", "security"],
     "homepage": "https://github.com/philiplb/CRUDlexUser",
     "license": "MIT",
     "authors": [
@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "philiplb/crudlex": ">=0.9.8",
+        "philiplb/crudlex": ">=0.9.7",
         "symfony/security": "~2.7"
     },
     "autoload": {
