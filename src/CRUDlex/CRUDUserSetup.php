@@ -19,7 +19,7 @@ class CRUDUserSetup {
 		return $str;
 	}
 
-    public function addEvents(CRUDData $data, $passwordField, $saltField) {
+    public function addEvents(CRUDData $data, $passwordField = 'password', $saltField = 'salt') {
 
         $saltGenFunction = function(CRUDEntity $entity) use ($saltField) {
             $salt = $this->getSalt(40);
