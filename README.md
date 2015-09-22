@@ -107,6 +107,11 @@ $userProvider = new CRUDlex\CRUDUserProvider($app['crud']->getData('user'), $app
  ));
 ```
 
+## Build Status
+
+[![Build Status](https://travis-ci.org/philiplb/CRUDlexUser.svg?branch=master)](https://travis-ci.org/philiplb/CRUDlexUser)
+[![Coverage Status](https://coveralls.io/repos/philiplb/CRUDlexUser/badge.png?branch=master)](https://coveralls.io/r/philiplb/CRUDlexUser?branch=master)
+
 ## Misc
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/dd63ce7f-349f-42dd-8e71-076950b726e5/mini.png)](https://insight.sensiolabs.com/projects/dd63ce7f-349f-42dd-8e71-076950b726e5)
