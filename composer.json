@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "philiplb/crudlex": "master-dev",
+        "philiplb/crudlex": "0.9.8",
         "symfony/security": "~2.7"
     },
     "require-dev": {
