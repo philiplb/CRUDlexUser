@@ -2,3 +2,4 @@ vendor
 composer.phar
 coverageReport
 build
+composer.lock
