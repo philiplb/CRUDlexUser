@@ -19,8 +19,6 @@ use CRUDlexUserTestEnv\CRUDTestDBSetup;
 
 class CRUDUserProviderTest extends \PHPUnit_Framework_TestCase {
 
-    protected $crudServiceProvider;
-
     protected $dataUser;
 
     protected $dataRole;
@@ -28,10 +26,10 @@ class CRUDUserProviderTest extends \PHPUnit_Framework_TestCase {
     protected $dataUserRole;
 
     protected function setUp() {
-        $this->crudServiceProvider = CRUDTestDBSetup::createCRUDServiceProvider();
-        $this->dataUser = $this->crudServiceProvider->getData('user');
-        $this->dataRole = $this->crudServiceProvider->getData('role');
-        $this->dataUserRole = $this->crudServiceProvider->getData('userRole');
+        $crudServiceProvider = CRUDTestDBSetup::createCRUDServiceProvider();
+        $this->dataUser = $crudServiceProvider->getData('user');
+        $this->dataRole = $crudServiceProvider->getData('role');
+        $this->dataUserRole = $crudServiceProvider->getData('userRole');
     }
 
     public function testLoadUserByUsername() {
