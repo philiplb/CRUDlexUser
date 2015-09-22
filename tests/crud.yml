@@ -1,0 +1,46 @@
+user:
+    label: User
+    table: user
+    fields:
+        username:
+            type: text
+            label: Username
+            required: true
+        password:
+            type: text
+            label: Password Hash
+            description: 'Set this to your desired password. Will be automatically converted to an hash value not meant to be readable.'
+            required: true
+        salt:
+            type: text
+            label: Password Salt
+            description: 'Auto populated field on user creation. Used internally.'
+            required: false
+role:
+    label: Roles
+    table: role
+    fields:
+        role:
+            type: text
+            label: Role
+            required: true
+userRole:
+    label: User Roles
+    table: userRole
+    fields:
+        user:
+            type: reference
+            label: User
+            reference:
+                table: user
+                nameField: username
+                entity: user
+            required: true
+        role:
+            type: reference
+            label: Role
+            reference:
+                table: role
+                nameField: role
+                entity: role
+            required: true
