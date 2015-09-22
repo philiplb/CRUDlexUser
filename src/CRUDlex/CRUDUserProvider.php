@@ -130,10 +130,10 @@ class CRUDUserProvider implements UserProviderInterface {
      * the user class name to test
      *
      * @return boolean
-     * true if the class is "CRUDUser"
+     * true if the class is "CRUDlex\CRUDUser"
      */
     public function supportsClass($class) {
-        return $class === 'CRUDUser';
+        return $class === 'CRUDlex\CRUDUser';
     }
 
 }
