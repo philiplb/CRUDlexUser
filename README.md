@@ -31,6 +31,7 @@ user:
             type: text
             label: Username
             required: true
+            unique: true
         password:
             type: text
             label: Password Hash
