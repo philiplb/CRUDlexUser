@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1442915970">
-  <project timestamp="1442915970">
+<coverage generated="1442917274">
+  <project timestamp="1442917274">
     <package name="CRUDlex">
       <file name="/Users/philiplb/Sites/CRUDlexUser/src/CRUDlex/CRUDUser.php">
         <class name="CRUDUser" namespace="CRUDlex">
-          <metrics methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="20" coveredelements="0"/>
+          <metrics methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
         </class>
-        <line num="36" type="method" name="__construct" crap="2" count="0"/>
-        <line num="37" type="stmt" count="0"/>
-        <line num="38" type="stmt" count="0"/>
-        <line num="39" type="stmt" count="0"/>
-        <line num="40" type="stmt" count="0"/>
-        <line num="41" type="stmt" count="0"/>
-        <line num="49" type="method" name="getRoles" crap="2" count="0"/>
-        <line num="50" type="stmt" count="0"/>
-        <line num="51" type="stmt" count="0"/>
-        <line num="59" type="method" name="getPassword" crap="2" count="0"/>
-        <line num="60" type="stmt" count="0"/>
-        <line num="61" type="stmt" count="0"/>
-        <line num="69" type="method" name="getSalt" crap="2" count="0"/>
-        <line num="70" type="stmt" count="0"/>
-        <line num="71" type="stmt" count="0"/>
-        <line num="79" type="method" name="getUsername" crap="2" count="0"/>
-        <line num="80" type="stmt" count="0"/>
-        <line num="81" type="stmt" count="0"/>
-        <line num="87" type="method" name="eraseCredentials" crap="2" count="0"/>
-        <line num="88" type="stmt" count="0"/>
-        <metrics loc="90" ncloc="36" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="20" coveredelements="0"/>
+        <line num="36" type="method" name="__construct" crap="1" count="5"/>
+        <line num="37" type="stmt" count="5"/>
+        <line num="38" type="stmt" count="5"/>
+        <line num="39" type="stmt" count="5"/>
+        <line num="40" type="stmt" count="5"/>
+        <line num="41" type="stmt" count="5"/>
+        <line num="49" type="method" name="getRoles" crap="1" count="1"/>
+        <line num="50" type="stmt" count="1"/>
+        <line num="59" type="method" name="getPassword" crap="1" count="1"/>
+        <line num="60" type="stmt" count="1"/>
+        <line num="69" type="method" name="getSalt" crap="1" count="1"/>
+        <line num="70" type="stmt" count="1"/>
+        <line num="79" type="method" name="getUsername" crap="1" count="1"/>
+        <line num="80" type="stmt" count="1"/>
+        <line num="87" type="method" name="eraseCredentials" crap="1" count="1"/>
+        <line num="88" type="stmt" count="1"/>
+        <metrics loc="90" ncloc="36" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
       </file>
       <file name="/Users/philiplb/Sites/CRUDlexUser/src/CRUDlex/CRUDUserProvider.php">
         <class name="CRUDUserProvider" namespace="CRUDlex">
@@ -107,6 +103,6 @@
         <metrics loc="85" ncloc="57" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="0" elements="34" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="3" loc="314" ncloc="159" classes="3" methods="13" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="73" coveredstatements="0" elements="86" coveredelements="0"/>
+    <metrics files="3" loc="314" ncloc="159" classes="3" methods="13" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="10" elements="82" coveredelements="16"/>
   </project>
 </coverage>
