@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4cb5e9e1683a68e8bb43af3cd8f8c2e0",
+    "hash": "5f505cb043b712c03e8e994faf8490a5",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -477,22 +477,23 @@
         },
         {
             "name": "philiplb/crudlex",
-            "version": "0.9.7",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/philiplb/CRUDlex.git",
-                "reference": "c04130e7a877356d4e09fa9dc4e17bc02d40b9b5"
+                "reference": "edd25f195fb1b1bba77b480a15ad871fb4e9d558"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/philiplb/CRUDlex/zipball/c04130e7a877356d4e09fa9dc4e17bc02d40b9b5",
-                "reference": "c04130e7a877356d4e09fa9dc4e17bc02d40b9b5",
+                "url": "https://api.github.com/repos/philiplb/CRUDlex/zipball/edd25f195fb1b1bba77b480a15ad871fb4e9d558",
+                "reference": "edd25f195fb1b1bba77b480a15ad871fb4e9d558",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "~2.5",
                 "php": ">=5.3.0",
                 "silex/silex": "~1.3",
+                "symfony/translation": "~2.7",
                 "symfony/twig-bridge": "~2.7",
                 "symfony/yaml": "~2.7"
             },
@@ -526,7 +527,7 @@
                 "crud",
                 "silex"
             ],
-            "time": "2015-07-25 23:01:48"
+            "time": "2015-09-22 14:11:54"
         },
         {
             "name": "pimple/pimple",
@@ -1083,6 +1084,67 @@
             "time": "2015-08-30 11:26:29"
         },
         {
+            "name": "symfony/translation",
+            "version": "v2.7.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Translation.git",
+                "reference": "485877661835e188cd78345c6d4eef1290d17571"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Translation/zipball/485877661835e188cd78345c6d4eef1290d17571",
+                "reference": "485877661835e188cd78345c6d4eef1290d17571",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "conflict": {
+                "symfony/config": "<2.7"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "~2.7",
+                "symfony/intl": "~2.4",
+                "symfony/phpunit-bridge": "~2.7",
+                "symfony/yaml": "~2.2"
+            },
+            "suggest": {
+                "psr/log": "To use logging capability in translator",
+                "symfony/config": "",
+                "symfony/yaml": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Translation\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Translation Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-09-06 08:36:38"
+        },
+        {
             "name": "symfony/twig-bridge",
             "version": "v2.7.4",
             "source": {
@@ -1212,16 +1274,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.22.1",
+            "version": "v1.22.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "b7fc2469fa009897871fb95b68237286fc54a5ad"
+                "reference": "79249fc8c9ff62e41e217e0c630e2e00bcadda6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/b7fc2469fa009897871fb95b68237286fc54a5ad",
-                "reference": "b7fc2469fa009897871fb95b68237286fc54a5ad",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/79249fc8c9ff62e41e217e0c630e2e00bcadda6a",
+                "reference": "79249fc8c9ff62e41e217e0c630e2e00bcadda6a",
                 "shasum": ""
             },
             "require": {
@@ -1269,7 +1331,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-09-15 06:50:16"
+            "time": "2015-09-22 13:59:32"
         }
     ],
     "packages-dev": [
@@ -4367,6 +4429,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "philiplb/crudlex": 20,
         "satooshi/php-coveralls": 20
     },
     "prefer-stable": false,
