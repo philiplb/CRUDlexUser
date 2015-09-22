@@ -6,6 +6,7 @@ use Silex\Provider\DoctrineServiceProvider;
 
 use CRUDlex\CRUDMySQLDataFactory;
 use CRUDlex\CRUDServiceProvider;
+use CRUDlex\CRUDUserSetup;
 use CRUDlexUserTestEnv\CRUDNullFileProcessor;
 
 class CRUDTestDBSetup {
@@ -50,10 +51,6 @@ class CRUDTestDBSetup {
             '  `updated_at` datetime NOT NULL,'.
             '  `deleted_at` datetime DEFAULT NULL,'.
             '  `version` int(11) NOT NULL,'.
-            '  `firstname` varchar(255) DEFAULT NULL,'.
-            '  `lastname` varchar(255) DEFAULT NULL,'.
-            '  `organisation` varchar(255) DEFAULT NULL,'.
-            '  `email` varchar(255) DEFAULT NULL,'.
             '  `password` varchar(255) NOT NULL,'.
             '  `salt` varchar(255) NOT NULL,'.
             '  `username` varchar(255) NOT NULL,'.
@@ -86,6 +83,10 @@ class CRUDTestDBSetup {
         $dataFactory = new CRUDMySQLDataFactory($app['db']);
         $crudFile = __DIR__.'/../crud.yml';
         $crudServiceProvider->init($dataFactory, $crudFile, self::$fileProcessor, true, $app);
+
+        $userSetup = new CRUDUserSetup();
+        $userSetup->addEvents($crudServiceProvider->getData('user'));
+
         return $crudServiceProvider;
     }
 
