@@ -62,7 +62,7 @@ class CRUDUserSetup {
             $password = $entity->get($passwordField);
 
 			if (!$password) {
-				return;
+				return true;
 			}
 
             $encoder = new MessageDigestPasswordEncoder();
