@@ -67,10 +67,12 @@ class CRUDUserSetup {
 
             $encoder = new MessageDigestPasswordEncoder();
             $salt = $entity->get($saltField);
+			$newSalt = false;
 
 			if (!$salt) {
 	            $salt = $this->getSalt(40);
 	            $entity->set($saltField, $salt);
+				$newSalt = true;
 			}
 
 			$passwordHash = $encoder->encodePassword($password, $salt);
@@ -79,7 +81,7 @@ class CRUDUserSetup {
 			$id = $entity->get('id');
 			if ($id !== null) {
 				$oldEntity = $data->get($entity->get('id'));
-				$doGenerateHash = $oldEntity->get($passwordField) !== $password;
+				$doGenerateHash = $oldEntity->get($passwordField) !== $password || $newSalt;
 			}
 
 			if ($doGenerateHash) {
