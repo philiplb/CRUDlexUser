@@ -60,6 +60,11 @@ class CRUDUserSetup {
 
         $pwHashFunction = function(CRUDEntity $entity) use ($data, $passwordField, $saltField) {
             $password = $entity->get($passwordField);
+
+			if (!$password) {
+				return;
+			}
+
             $encoder = new MessageDigestPasswordEncoder();
             $salt = $entity->get($saltField);
 
