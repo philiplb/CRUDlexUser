@@ -24,6 +24,12 @@ class CRUDUserSetup {
 
 	/**
 	 * Generates a random salt of the given length.
+	 *
+	 * @param int $len
+	 * the desired length
+	 *
+	 * @return string
+	 * a random salt of the given length
 	 */
 	public function getSalt($len) {
 		$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-=_+';
