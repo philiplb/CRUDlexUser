@@ -25,7 +25,7 @@ class CRUDUserSetup {
 	/**
 	 * Generates a random salt of the given length.
 	 */
-	protected function getSalt($len) {
+	public function getSalt($len) {
 		$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-=_+';
 		$l = strlen($chars) - 1;
 		$str = '';
@@ -50,15 +50,17 @@ class CRUDUserSetup {
 	 */
     public function addEvents(CRUDData $data, $passwordField = 'password', $saltField = 'salt') {
 
-        $saltGenFunction = function(CRUDEntity $entity) use ($saltField) {
-            $salt = $this->getSalt(40);
+		$that = $this;
+
+        $saltGenFunction = function(CRUDEntity $entity) use ($saltField, $that) {
+            $salt = $that->getSalt(40);
             $entity->set($saltField, $salt);
             return true;
         };
 
         $data->pushEvent('before', 'create', $saltGenFunction);
 
-        $pwHashFunction = function(CRUDEntity $entity) use ($data, $passwordField, $saltField) {
+        $pwHashFunction = function(CRUDEntity $entity) use ($data, $passwordField, $saltField, $that) {
             $password = $entity->get($passwordField);
 
 			if (!$password) {
@@ -70,7 +72,7 @@ class CRUDUserSetup {
 			$newSalt = false;
 
 			if (!$salt) {
-	            $salt = $this->getSalt(40);
+	            $salt = $that->getSalt(40);
 	            $entity->set($saltField, $salt);
 				$newSalt = true;
 			}

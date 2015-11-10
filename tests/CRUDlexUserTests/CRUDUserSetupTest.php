@@ -13,6 +13,8 @@ namespace CRUDlexUserTestEnv;
 
 use CRUDlex\CRUDUserProvider;
 
+use CRUDlex\CRUDUserSetup;
+
 use CRUDlexUserTestEnv\CRUDTestDBSetup;
 
 class CRUDUserSetupTest extends \PHPUnit_Framework_TestCase {
@@ -48,5 +50,11 @@ class CRUDUserSetupTest extends \PHPUnit_Framework_TestCase {
         $read = $readUser2->get('password');
         $this->assertNotSame($read, $hash);
 
+    }
+
+    public function testGetSalt() {
+        $userSetup = new CRUDUserSetup();
+        $read = $userSetup->getSalt(40);
+        $this->assertTrue(strlen($read) === 40);
     }
 }
