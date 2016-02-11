@@ -22,41 +22,41 @@ use CRUDlex\CRUDData;
 class CRUDUserSetup {
 
 
-	/**
-	 * Generates a random salt of the given length.
-	 *
-	 * @param int $len
-	 * the desired length
-	 *
-	 * @return string
-	 * a random salt of the given length
-	 */
-	public function getSalt($len) {
-		$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-=_+';
-		$l = strlen($chars) - 1;
-		$str = '';
-		for ($i = 0; $i < $len; ++$i) {
-			$str .= $chars[mt_rand(0, $l)];
-		}
-		return $str;
-	}
+    /**
+     * Generates a random salt of the given length.
+     *
+     * @param int $len
+     * the desired length
+     *
+     * @return string
+     * a random salt of the given length
+     */
+    public function getSalt($len) {
+        $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-=_+';
+        $l = strlen($chars) - 1;
+        $str = '';
+        for ($i = 0; $i < $len; ++$i) {
+            $str .= $chars[mt_rand(0, $l)];
+        }
+        return $str;
+    }
 
-	/**
-	 * Setups CRUDlex with some events so the passwords get salted and
-	 * hashed properly.
-	 *
-	 * @param CRUDData $data
-	 * the CRUDData instance managing the users
-	 *
+    /**
+     * Setups CRUDlex with some events so the passwords get salted and
+     * hashed properly.
+     *
+     * @param CRUDData $data
+     * the CRUDData instance managing the users
+     *
      * @param string $passwordField
      * the CRUDEntity fieldname of the password hash
-	 *
+     *
      * @param string $saltField
      * the CRUDEntity fieldname of the password hash salt
-	 */
+     */
     public function addEvents(CRUDData $data, $passwordField = 'password', $saltField = 'salt') {
 
-		$that = $this;
+        $that = $this;
 
         $saltGenFunction = function(CRUDEntity $entity) use ($saltField, $that) {
             $salt = $that->getSalt(40);
@@ -69,32 +69,32 @@ class CRUDUserSetup {
         $pwHashFunction = function(CRUDEntity $entity) use ($data, $passwordField, $saltField, $that) {
             $password = $entity->get($passwordField);
 
-			if (!$password) {
-				return true;
-			}
+            if (!$password) {
+                return true;
+            }
 
             $encoder = new MessageDigestPasswordEncoder();
             $salt = $entity->get($saltField);
-			$newSalt = false;
+            $newSalt = false;
 
-			if (!$salt) {
-	            $salt = $that->getSalt(40);
-	            $entity->set($saltField, $salt);
-				$newSalt = true;
-			}
+            if (!$salt) {
+                $salt = $that->getSalt(40);
+                $entity->set($saltField, $salt);
+                $newSalt = true;
+            }
 
-			$passwordHash = $encoder->encodePassword($password, $salt);
+            $passwordHash = $encoder->encodePassword($password, $salt);
 
-			$doGenerateHash = true;
-			$id = $entity->get('id');
-			if ($id !== null) {
-				$oldEntity = $data->get($entity->get('id'));
-				$doGenerateHash = $oldEntity->get($passwordField) !== $password || $newSalt;
-			}
+            $doGenerateHash = true;
+            $id = $entity->get('id');
+            if ($id !== null) {
+                $oldEntity = $data->get($entity->get('id'));
+                $doGenerateHash = $oldEntity->get($passwordField) !== $password || $newSalt;
+            }
 
-			if ($doGenerateHash) {
-            	$entity->set($passwordField, $passwordHash);
-			}
+            if ($doGenerateHash) {
+                $entity->set($passwordField, $passwordHash);
+            }
             return true;
         };
 
