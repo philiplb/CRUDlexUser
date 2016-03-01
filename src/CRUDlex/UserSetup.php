@@ -20,6 +20,23 @@ use CRUDlex\Data;
  */
 class UserSetup {
 
+    /**
+     * Generates a new salt if the given salt is null.
+     *
+     * @param &string $salt
+     * the salt to override if null
+     *
+     * @return boolean
+     * true if a new salt was generated
+     */
+    private function possibleGenSalt(&$salt) {
+        if (!$salt) {
+            $salt = $this->getSalt(40);
+            $entity->set($saltField, $salt);
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Generates a random salt of the given length.
@@ -74,13 +91,7 @@ class UserSetup {
 
             $encoder = new MessageDigestPasswordEncoder();
             $salt = $entity->get($saltField);
-            $newSalt = false;
-
-            if (!$salt) {
-                $salt = $that->getSalt(40);
-                $entity->set($saltField, $salt);
-                $newSalt = true;
-            }
+            $newSalt = $that->possibleGenSalt($salt);
 
             $passwordHash = $encoder->encodePassword($password, $salt);
 
