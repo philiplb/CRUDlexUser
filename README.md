@@ -3,6 +3,9 @@ CRUDlex User
 
 CRUDlexUser is a library offering an user provider for symfony/security.
 
+Its tags follow the versioning of CRUDlex. So the version 0.9.9 will work with
+CRUDlex 0.9.9 etc.. The master branch works against the master of CRUDlex.
+
 [![Total Downloads](https://poser.pugx.org/philiplb/crudlexuser/downloads.svg)](https://packagist.org/packages/philiplb/crudlexuser)
 [![Latest Stable Version](https://poser.pugx.org/philiplb/crudlexuser/v/stable.svg)](https://packagist.org/packages/philiplb/crudlexuser)
 [![Latest Unstable Version](https://poser.pugx.org/philiplb/crudlexuser/v/unstable.svg)](https://packagist.org/packages/philiplb/crudlexuser) [![License](https://poser.pugx.org/philiplb/crudlexuser/license.svg)](https://packagist.org/packages/philiplb/crudlexuser)
@@ -11,6 +14,7 @@ CRUDlexUser is a library offering an user provider for symfony/security.
 
 The CRUDlexUser API itself is documented here:
 
+* [0.9.9](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.9/)
 * [0.9.8](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.8/)
 
 ## Usage

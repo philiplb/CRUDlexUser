@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class CRUDlex\CRUDUser | CRUDlexUser API</title>
+
+	<link rel="stylesheet" href="resources/style.css?c2f33731c1948fbed7c333554678bfa68d4817da">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-CRUDlex.html">
+						CRUDlex					</a>
+
+						</li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-CRUDlex.CRUDUser.html">CRUDUser</a></li>
+				<li><a href="class-CRUDlex.CRUDUserProvider.html">CRUDUserProvider</a></li>
+				<li><a href="class-CRUDlex.CRUDUserSetup.html">CRUDUserSetup</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-CRUDlex.html" title="Summary of CRUDlex"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class CRUDUser</h1>
+
+
+	<div class="description">
+	<p>The UserInterface implementation for the UserProvider.</p>
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b><span>CRUDlex\CRUDUser</span></b>			
+			 implements 
+<span>Symfony\Component\Security\Core\User\UserInterface</span>
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-CRUDlex.html">CRUDlex</a><br>
+		
+
+			<b>Located at</b> CRUDUser.php		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code>__construct( <span>string <var>$username</var></span>, <span>string <var>$password</var></span>, <span>string <var>$salt</var></span>, <span>array <var>$roles</var></span> )</code>
+
+		<div class="description short">
+			<p>Constructor.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Constructor.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$username</var></dt>
+					<dd>the username</dd>
+					<dt><var>$password</var></dt>
+					<dd>the password (hash)</dd>
+					<dt><var>$salt</var></dt>
+					<dd>the password hash salt</dd>
+					<dt><var>$roles</var></dt>
+					<dd>the roles</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRoles" id="_getRoles">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getRoles">#</a>
+		<code>getRoles( )</code>
+
+		<div class="description short">
+			<p>Gets the roles.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Gets the roles.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					array<br>the roles
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPassword" id="_getPassword">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPassword">#</a>
+		<code>getPassword( )</code>
+
+		<div class="description short">
+			<p>Gets the password (hash).</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Gets the password (hash).</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string<br>the password
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSalt" id="_getSalt">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSalt">#</a>
+		<code>getSalt( )</code>
+
+		<div class="description short">
+			<p>Gets the password hash salt.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Gets the password hash salt.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string<br>the salt
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getUsername" id="_getUsername">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getUsername">#</a>
+		<code>getUsername( )</code>
+
+		<div class="description short">
+			<p>Gets the username.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Gets the username.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string<br>the username
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="eraseCredentials" id="_eraseCredentials">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_eraseCredentials">#</a>
+		<code>eraseCredentials( )</code>
+
+		<div class="description short">
+			<p>Should erase some crucial data if needed. But nothing to do here in this
+implementation.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Should erase some crucial data if needed. But nothing to do here in this
+implementation.</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		CRUDlexUser API API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>
