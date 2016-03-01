@@ -13,6 +13,7 @@ namespace CRUDlex;
 
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use CRUDlex\Data;
+use CRUDlex\Entity;
 
 /**
  * This class setups CRUDlex with some events so the passwords get salted and
@@ -23,13 +24,17 @@ class UserSetup {
     /**
      * Generates a new salt if the given salt is null.
      *
-     * @param &string $salt
+     * @param string $salt
      * the salt to override if null
+     * @param Entity
+     * the entity getting the new salt
+     * @param string $saltField
+     * the field holding the salt in the entity
      *
      * @return boolean
      * true if a new salt was generated
      */
-    private function possibleGenSalt(&$salt) {
+    private function possibleGenSalt(&$salt, Entity $entity, $saltField) {
         if (!$salt) {
             $salt = $this->getSalt(40);
             $entity->set($saltField, $salt);
@@ -91,7 +96,7 @@ class UserSetup {
 
             $encoder = new MessageDigestPasswordEncoder();
             $salt = $entity->get($saltField);
-            $newSalt = $that->possibleGenSalt($salt);
+            $newSalt = $that->possibleGenSalt($salt, $entity, $saltField);
 
             $passwordHash = $encoder->encodePassword($password, $salt);
 
