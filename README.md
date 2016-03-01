@@ -11,7 +11,7 @@ CRUDlexUser is a library offering an user provider for symfony/security.
 
 The CRUDlexUser API itself is documented here:
 
-* [0.9.0](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.0/)
+* [0.9.8](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.8/)
 
 ## Usage
 
