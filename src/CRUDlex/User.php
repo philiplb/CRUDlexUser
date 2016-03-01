@@ -19,6 +19,26 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface {
 
     /**
+     * Hold the username.
+     */
+    private $username;
+
+    /**
+     * Hold the password.
+     */
+    private $password;
+
+    /**
+     * Hold the roles.
+     */
+    private $salt;
+
+    /**
+     * Hold password hash salt.
+     */
+    private $roles;
+
+    /**
      * Constructor.
      *
      * @param string $username

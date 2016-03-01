@@ -97,9 +97,11 @@ class UserProvider implements UserProviderInterface {
         $crudRoles = $this->userRoleData->listEntries(array('user' => $User->get('id')), array('user' => '='));
         $this->userRoleData->fetchReferences($crudRoles);
         $roles = array('ROLE_USER');
-        foreach ($crudRoles as $crudRole) {
-            $role = $crudRole->get('role');
-            $roles[] = $role['name'];
+        if ($crudRoles !== null) {
+            foreach ($crudRoles as $crudRole) {
+                $role = $crudRole->get('role');
+                $roles[] = $role['name'];
+            }
         }
 
         $user = new User($username, $password, $salt, $roles);
