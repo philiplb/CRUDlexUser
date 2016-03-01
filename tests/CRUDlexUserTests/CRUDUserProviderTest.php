@@ -13,11 +13,11 @@ namespace CRUDlexUserTestEnv;
 
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
-use CRUDlex\CRUDUserProvider;
+use CRUDlex\UserProvider;
 
-use CRUDlexUserTestEnv\CRUDTestDBSetup;
+use CRUDlexUserTestEnv\TestDBSetup;
 
-class CRUDUserProviderTest extends \PHPUnit_Framework_TestCase {
+class UserProviderTest extends \PHPUnit_Framework_TestCase {
 
     protected $dataUser;
 
@@ -26,7 +26,7 @@ class CRUDUserProviderTest extends \PHPUnit_Framework_TestCase {
     protected $dataUserRole;
 
     protected function setUp() {
-        $crudServiceProvider = CRUDTestDBSetup::createCRUDServiceProvider();
+        $crudServiceProvider = TestDBSetup::createServiceProvider();
         $this->dataUser = $crudServiceProvider->getData('user');
         $this->dataRole = $crudServiceProvider->getData('role');
         $this->dataUserRole = $crudServiceProvider->getData('userRole');
@@ -49,7 +49,7 @@ class CRUDUserProviderTest extends \PHPUnit_Framework_TestCase {
         $userRole->set('role', $role->get('id'));
         $this->dataUserRole->create($userRole);
 
-        $userProvider = new CRUDUserProvider($this->dataUser, $this->dataUserRole);
+        $userProvider = new UserProvider($this->dataUser, $this->dataUserRole);
 
         $userRead = $userProvider->loadUserByUsername($expected);
         $read = $userRead->getUsername();
@@ -74,7 +74,7 @@ class CRUDUserProviderTest extends \PHPUnit_Framework_TestCase {
         $user->set('password', 'asdasd');
         $this->dataUser->create($user);
 
-        $userProvider = new CRUDUserProvider($this->dataUser, $this->dataUserRole);
+        $userProvider = new UserProvider($this->dataUser, $this->dataUserRole);
         $userRead = $userProvider->loadUserByUsername($expected);
 
         $expected = array('ROLE_USER');
@@ -98,8 +98,8 @@ class CRUDUserProviderTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testSupportsClass() {
-        $userProvider = new CRUDUserProvider($this->dataUser, $this->dataUserRole);
-        $read = $userProvider->supportsClass('CRUDlex\CRUDUser');
+        $userProvider = new UserProvider($this->dataUser, $this->dataUserRole);
+        $read = $userProvider->supportsClass('CRUDlex\User');
         $this->assertTrue($read);
         $read = $userProvider->supportsClass('foo');
         $this->assertFalse($read);

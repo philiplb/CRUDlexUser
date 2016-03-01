@@ -13,13 +13,13 @@ namespace CRUDlex;
 
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
-use CRUDlex\CRUDData;
+use CRUDlex\Data;
 
 /**
  * This class setups CRUDlex with some events so the passwords get salted and
  * hashed properly.
  */
-class CRUDUserSetup {
+class UserSetup {
 
 
     /**
@@ -45,20 +45,20 @@ class CRUDUserSetup {
      * Setups CRUDlex with some events so the passwords get salted and
      * hashed properly.
      *
-     * @param CRUDData $data
-     * the CRUDData instance managing the users
+     * @param Data $data
+     * the Data instance managing the users
      *
      * @param string $passwordField
-     * the CRUDEntity fieldname of the password hash
+     * the Entity fieldname of the password hash
      *
      * @param string $saltField
-     * the CRUDEntity fieldname of the password hash salt
+     * the Entity fieldname of the password hash salt
      */
-    public function addEvents(CRUDData $data, $passwordField = 'password', $saltField = 'salt') {
+    public function addEvents(Data $data, $passwordField = 'password', $saltField = 'salt') {
 
         $that = $this;
 
-        $saltGenFunction = function(CRUDEntity $entity) use ($saltField, $that) {
+        $saltGenFunction = function(Entity $entity) use ($saltField, $that) {
             $salt = $that->getSalt(40);
             $entity->set($saltField, $salt);
             return true;
@@ -66,7 +66,7 @@ class CRUDUserSetup {
 
         $data->pushEvent('before', 'create', $saltGenFunction);
 
-        $pwHashFunction = function(CRUDEntity $entity) use ($data, $passwordField, $saltField, $that) {
+        $pwHashFunction = function(Entity $entity) use ($data, $passwordField, $saltField, $that) {
             $password = $entity->get($passwordField);
 
             if (!$password) {

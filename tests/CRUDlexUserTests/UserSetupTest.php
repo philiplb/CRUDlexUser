@@ -11,18 +11,18 @@
 
 namespace CRUDlexUserTestEnv;
 
-use CRUDlex\CRUDUserProvider;
+use CRUDlex\UserProvider;
 
-use CRUDlex\CRUDUserSetup;
+use CRUDlex\UserSetup;
 
-use CRUDlexUserTestEnv\CRUDTestDBSetup;
+use CRUDlexUserTestEnv\TestDBSetup;
 
-class CRUDUserSetupTest extends \PHPUnit_Framework_TestCase {
+class UserSetupTest extends \PHPUnit_Framework_TestCase {
 
     protected $dataUser;
 
     protected function setUp() {
-        $crudServiceProvider = CRUDTestDBSetup::createCRUDServiceProvider();
+        $crudServiceProvider = TestDBSetup::createServiceProvider();
         $this->dataUser = $crudServiceProvider->getData('user');
     }
 
@@ -53,7 +53,7 @@ class CRUDUserSetupTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testGetSalt() {
-        $userSetup = new CRUDUserSetup();
+        $userSetup = new UserSetup();
         $read = $userSetup->getSalt(40);
         $this->assertTrue(strlen($read) === 40);
     }

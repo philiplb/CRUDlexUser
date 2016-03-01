@@ -11,26 +11,26 @@
 
 namespace CRUDlexUserTestEnv;
 
-use CRUDlex\CRUDFileProcessorInterface;
-use CRUDlex\CRUDEntity;
+use CRUDlex\FileProcessorInterface;
+use CRUDlex\Entity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CRUDNullFileProcessor implements CRUDFileProcessorInterface {
+class NullFileProcessor implements FileProcessorInterface {
 
     public function __construct() {
     }
 
-    public function createFile(Request $request, CRUDEntity $entity, $entityName, $field) {
+    public function createFile(Request $request, Entity $entity, $entityName, $field) {
     }
 
-    public function updateFile(Request $request, CRUDEntity $entity, $entityName, $field) {
+    public function updateFile(Request $request, Entity $entity, $entityName, $field) {
     }
 
-    public function deleteFile(CRUDEntity $entity, $entityName, $field) {
+    public function deleteFile(Entity $entity, $entityName, $field) {
     }
 
-    public function renderFile(CRUDEntity $entity, $entityName, $field) {
+    public function renderFile(Entity $entity, $entityName, $field) {
         return '';
     }
 

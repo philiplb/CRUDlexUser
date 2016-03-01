@@ -96,7 +96,7 @@ In order to get the salt generated and the password hashed, you have to let the
 library add some CRUDlex events in your initialization:
 
 ```PHP
-$crudUserSetup = new CRUDlex\CRUDUserSetup();
+$crudUserSetup = new CRUDlex\UserSetup();
 $crudUserSetup->addEvents($app['crud']->getData('user'));
 ```
 
@@ -105,7 +105,7 @@ $crudUserSetup->addEvents($app['crud']->getData('user'));
 Simply instantiate and add it to your symfony/security configuration:
 
 ```PHP
-$userProvider = new CRUDlex\CRUDUserProvider($app['crud']->getData('user'), $app['crud']->getData('userRole'));
+$userProvider = new CRUDlex\UserProvider($app['crud']->getData('user'), $app['crud']->getData('userRole'));
  $app->register(new Silex\Provider\SecurityServiceProvider(), array(
      'security.firewalls' => array(
          'admin' => array(

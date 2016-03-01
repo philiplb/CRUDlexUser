@@ -4,12 +4,12 @@ namespace CRUDlexUserTestEnv;
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
 
-use CRUDlex\CRUDMySQLDataFactory;
-use CRUDlex\CRUDServiceProvider;
-use CRUDlex\CRUDUserSetup;
-use CRUDlexUserTestEnv\CRUDNullFileProcessor;
+use CRUDlex\MySQLDataFactory;
+use CRUDlex\ServiceProvider;
+use CRUDlex\UserSetup;
+use CRUDlexUserTestEnv\NullFileProcessor;
 
-class CRUDTestDBSetup {
+class TestDBSetup {
 
     private static $fileProcessor;
 
@@ -76,15 +76,15 @@ class CRUDTestDBSetup {
         return $app;
     }
 
-    public static function createCRUDServiceProvider() {
-        self::$fileProcessor = new CRUDNullFileProcessor();
+    public static function createServiceProvider() {
+        self::$fileProcessor = new NullFileProcessor();
         $app = self::createAppAndDB();
-        $crudServiceProvider = new CRUDServiceProvider();
-        $dataFactory = new CRUDMySQLDataFactory($app['db']);
+        $crudServiceProvider = new ServiceProvider();
+        $dataFactory = new MySQLDataFactory($app['db']);
         $crudFile = __DIR__.'/../crud.yml';
         $crudServiceProvider->init($dataFactory, $crudFile, self::$fileProcessor, true, $app);
 
-        $userSetup = new CRUDUserSetup();
+        $userSetup = new UserSetup();
         $userSetup->addEvents($crudServiceProvider->getData('user'));
 
         return $crudServiceProvider;

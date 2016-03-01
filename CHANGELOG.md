@@ -1,6 +1,10 @@
 CRUDlexUser Changelog
 =====================
 
+## 0.9.10
+Released: Upcoming
+- Updated to the CRUDlex 0.9.10 API
+
 ## 0.9.9
 Released: 2016-03-01
 - Updated to CRUDlex 0.9.9

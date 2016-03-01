@@ -15,13 +15,13 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
-use CRUDlex\CRUDData;
-use CRUDlex\CRUDUser;
+use CRUDlex\Data;
+use CRUDlex\User;
 
 /**
  * The implementation of the UserProviderInterface to work with the CRUDlex API.
  */
-class CRUDUserProvider implements UserProviderInterface {
+class UserProvider implements UserProviderInterface {
 
     /**
      * The CRUDEntity fieldname of the username.
@@ -51,22 +51,22 @@ class CRUDUserProvider implements UserProviderInterface {
     /**
      * Constructor.
      *
-     * @param CRUDData $userData
-     * the CRUDData instance to grab the user data from
+     * @param Data $userData
+     * the Data instance to grab the user data from
      *
-     * @param CRUDData $userRoleData
-     * the CRUDData instance to grab the user role data from
+     * @param Data $userRoleData
+     * the Data instance to grab the user role data from
      *
      * @param string $usernameField
-     * the CRUDEntity fieldname of the username
+     * the Entity fieldname of the username
      *
      * @param string $passwordField
-     * the CRUDEntity fieldname of the password hash
+     * the Entity fieldname of the password hash
      *
      * @param string $saltField
-     * the CRUDEntity fieldname of the password hash salt
+     * the Entity fieldname of the password hash salt
      */
-    public function __construct(CRUDData $userData, CRUDData $userRoleData, $usernameField = 'username', $passwordField = 'password', $saltField = 'salt') {
+    public function __construct(Data $userData, Data $userRoleData, $usernameField = 'username', $passwordField = 'password', $saltField = 'salt') {
         $this->userData = $userData;
         $this->userRoleData = $userRoleData;
         $this->usernameField = $usernameField;
@@ -81,21 +81,21 @@ class CRUDUserProvider implements UserProviderInterface {
      * @param string $username
      * the username
      *
-     * @return CRUDUser
+     * @return User
      * the loaded user
      */
     public function loadUserByUsername($username) {
 
-        $crudUsers = $this->userData->listEntries(array($this->usernameField => $username), array($this->usernameField => '='), 0, 1);
-        if (count($crudUsers) === 0) {
+        $Users = $this->userData->listEntries(array($this->usernameField => $username), array($this->usernameField => '='), 0, 1);
+        if (count($Users) === 0) {
             throw new UsernameNotFoundException();
         }
 
-        $crudUser = $crudUsers[0];
-        $password = $crudUser->get($this->passwordField);
-        $salt = $crudUser->get($this->saltField);
+        $User = $Users[0];
+        $password = $User->get($this->passwordField);
+        $salt = $User->get($this->saltField);
 
-        $crudRoles = $this->userRoleData->listEntries(array('user' => $crudUser->get('id')), array('user' => '='));
+        $crudRoles = $this->userRoleData->listEntries(array('user' => $User->get('id')), array('user' => '='));
         $this->userRoleData->fetchReferences($crudRoles);
         $roles = array('ROLE_USER');
         foreach ($crudRoles as $crudRole) {
@@ -103,7 +103,7 @@ class CRUDUserProvider implements UserProviderInterface {
             $roles[] = $role['name'];
         }
 
-        $user = new CRUDUser($username, $password, $salt, $roles);
+        $user = new User($username, $password, $salt, $roles);
 
         return $user;
     }
@@ -115,7 +115,7 @@ class CRUDUserProvider implements UserProviderInterface {
      * @param UserInterface $user
      * the user to reload
      *
-     * @return CRUDUser
+     * @return User
      * the reloaded user
      */
     public function refreshUser(UserInterface $user) {
@@ -130,10 +130,10 @@ class CRUDUserProvider implements UserProviderInterface {
      * the user class name to test
      *
      * @return boolean
-     * true if the class is "CRUDlex\CRUDUser"
+     * true if the class is "CRUDlex\User"
      */
     public function supportsClass($class) {
-        return $class === 'CRUDlex\CRUDUser';
+        return $class === 'CRUDlex\User';
     }
 
 }

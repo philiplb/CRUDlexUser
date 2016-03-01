@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * The UserInterface implementation for the UserProvider.
  */
-class CRUDUser implements UserInterface {
+class User implements UserInterface {
 
     /**
      * Constructor.
