@@ -12,7 +12,6 @@
 namespace CRUDlex;
 
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-
 use CRUDlex\Data;
 
 /**
