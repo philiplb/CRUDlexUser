@@ -48,6 +48,28 @@ class UserProvider implements UserProviderInterface {
     protected $userRoleData;
 
     /**
+     * Loads the roles of an user.
+     *
+     * @param mixed $userId
+     * the id of the user
+     *
+     * @return string[]
+     * the roles of the user
+     */
+    protected function loadUserRoles($userId) {
+        $crudRoles = $this->userRoleData->listEntries(array('user' => $userId), array('user' => '='));
+        $this->userRoleData->fetchReferences($crudRoles);
+        $roles = array('ROLE_USER');
+        if ($crudRoles !== null) {
+            foreach ($crudRoles as $crudRole) {
+                $role = $crudRole->get('role');
+                $roles[] = $role['name'];
+            }
+        }
+        return $roles;
+    }
+
+    /**
      * Constructor.
      *
      * @param Data $userData
@@ -85,28 +107,18 @@ class UserProvider implements UserProviderInterface {
      */
     public function loadUserByUsername($username) {
 
-        $Users = $this->userData->listEntries(array($this->usernameField => $username), array($this->usernameField => '='), 0, 1);
-        if (count($Users) === 0) {
+        $users = $this->userData->listEntries(array($this->usernameField => $username), array($this->usernameField => '='), 0, 1);
+        if (count($users) === 0) {
             throw new UsernameNotFoundException();
         }
 
-        $User = $Users[0];
-        $password = $User->get($this->passwordField);
-        $salt = $User->get($this->saltField);
+        $user = $users[0];
+        $password = $user->get($this->passwordField);
+        $salt = $user->get($this->saltField);
+        $roles = $this->loadUserRoles($user->get('id'));
 
-        $crudRoles = $this->userRoleData->listEntries(array('user' => $User->get('id')), array('user' => '='));
-        $this->userRoleData->fetchReferences($crudRoles);
-        $roles = array('ROLE_USER');
-        if ($crudRoles !== null) {
-            foreach ($crudRoles as $crudRole) {
-                $role = $crudRole->get('role');
-                $roles[] = $role['name'];
-            }
-        }
-
-        $user = new User($username, $password, $salt, $roles);
-
-        return $user;
+        $userObj = new User($username, $password, $salt, $roles);
+        return $userObj;
     }
 
     /**
