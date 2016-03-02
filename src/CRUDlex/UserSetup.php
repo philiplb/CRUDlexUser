@@ -34,7 +34,7 @@ class UserSetup {
      * @return boolean
      * true if a new salt was generated
      */
-    private function possibleGenSalt(&$salt, Entity $entity, $saltField) {
+    public function possibleGenSalt(&$salt, Entity $entity, $saltField) {
         if (!$salt) {
             $salt = $this->getSalt(40);
             $entity->set($saltField, $salt);
