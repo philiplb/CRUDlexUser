@@ -44,6 +44,33 @@ class UserSetup {
     }
 
     /**
+     * Determines whether the entity needs a new hash generated.
+     *
+     * @param Data $data
+     * the CRUDlex data instance of the user entity
+     * @param Entity $entity
+     * the entity
+     * @param string $passwordField
+     * the field holding the password hash in the entity
+     * @param string $password
+     * the current password hash
+     * @param boolean $newSalt
+     * whether a new password hash salt was generated
+     *
+     * @return boolean
+     * true if the entity needs a new hash
+     */
+    public function doGenerateHash(Data $data, Entity $entity, $passwordField, $password, $newSalt) {
+        $doGenerateHash = true;
+        $id = $entity->get('id');
+        if ($id !== null) {
+            $oldEntity = $data->get($entity->get('id'));
+            $doGenerateHash = $oldEntity->get($passwordField) !== $password || $newSalt;
+        }
+        return $doGenerateHash;
+    }
+
+    /**
      * Generates a random salt of the given length.
      *
      * @param int $len
@@ -100,12 +127,7 @@ class UserSetup {
 
             $passwordHash = $encoder->encodePassword($password, $salt);
 
-            $doGenerateHash = true;
-            $id = $entity->get('id');
-            if ($id !== null) {
-                $oldEntity = $data->get($entity->get('id'));
-                $doGenerateHash = $oldEntity->get($passwordField) !== $password || $newSalt;
-            }
+            $doGenerateHash = $that->doGenerateHash($data, $entity, $passwordField, $password, $newSalt);
 
             if ($doGenerateHash) {
                 $entity->set($passwordField, $passwordHash);
