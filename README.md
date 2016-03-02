@@ -106,14 +106,14 @@ Simply instantiate and add it to your symfony/security configuration:
 
 ```PHP
 $userProvider = new CRUDlex\UserProvider($app['crud']->getData('user'), $app['crud']->getData('userRole'));
- $app->register(new Silex\Provider\SecurityServiceProvider(), array(
-     'security.firewalls' => array(
-         'admin' => array(
-             //...
-             'users' => $userProvider
-         ),
-     ),
- ));
+$app->register(new Silex\Provider\SecurityServiceProvider(), array(
+    'security.firewalls' => array(
+        'admin' => array(
+            //...
+            'users' => $userProvider
+        ),
+    ),
+));
 ```
 
 ## Build Status
