@@ -44,12 +44,7 @@ class UserSetup {
 
             $encoder = new MessageDigestPasswordEncoder();
             $salt = $entity->get($saltField);
-            $newSalt = false;
-            if (!$salt) {
-                $salt = $that->getSalt(40);
-                $entity->set($saltField, $salt);
-                $newSalt = true;
-            }
+            $newSalt = $that->possibleGenSalt($salt, $entity, $saltField);
 
             $passwordHash = $encoder->encodePassword($password, $salt);
 
@@ -60,6 +55,28 @@ class UserSetup {
             }
             return true;
         };
+    }
+
+    /**
+     * Generates a new salt if the given salt is null.
+     *
+     * @param string $salt
+     * the salt to override if null
+     * @param Entity
+     * the entity getting the new salt
+     * @param string $saltField
+     * the field holding the salt in the entity
+     *
+     * @return boolean
+     * true if a new salt was generated
+     */
+    public function possibleGenSalt(&$salt, Entity $entity, $saltField) {
+        if (!$salt) {
+            $salt = $this->getSalt(40);
+            $entity->set($saltField, $salt);
+            return true;
+        }
+        return false;
     }
 
     /**
