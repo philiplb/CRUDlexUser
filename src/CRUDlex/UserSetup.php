@@ -22,6 +22,42 @@ use CRUDlex\Entity;
 class UserSetup {
 
     /**
+     * Gets a closure for possibly generating a password hash in the entity.
+     *
+     * @param Data $data
+     * the Data instance managing the users
+     *
+     * @param string $passwordField
+     * the Entity fieldname of the password hash
+     *
+     * @param string $saltField
+     * the Entity fieldname of the password hash salt
+     */
+    protected function getPWHashFunction(Data $data, $passwordField, $saltField) {
+        $that = $this;
+        return function(Entity $entity) use ($data, $passwordField, $saltField, $that) {
+            $password = $entity->get($passwordField);
+
+            if (!$password) {
+                return true;
+            }
+
+            $encoder = new MessageDigestPasswordEncoder();
+            $salt = $entity->get($saltField);
+            $newSalt = $that->possibleGenSalt($salt, $entity, $saltField);
+
+            $passwordHash = $encoder->encodePassword($password, $salt);
+
+            $doGenerateHash = $that->doGenerateHash($data, $entity, $passwordField, $password, $newSalt);
+
+            if ($doGenerateHash) {
+                $entity->set($passwordField, $passwordHash);
+            }
+            return true;
+        };
+    }
+
+    /**
      * Generates a new salt if the given salt is null.
      *
      * @param string $salt
@@ -105,7 +141,6 @@ class UserSetup {
     public function addEvents(Data $data, $passwordField = 'password', $saltField = 'salt') {
 
         $that = $this;
-
         $saltGenFunction = function(Entity $entity) use ($saltField, $that) {
             $salt = $that->getSalt(40);
             $entity->set($saltField, $salt);
@@ -114,26 +149,7 @@ class UserSetup {
 
         $data->pushEvent('before', 'create', $saltGenFunction);
 
-        $pwHashFunction = function(Entity $entity) use ($data, $passwordField, $saltField, $that) {
-            $password = $entity->get($passwordField);
-
-            if (!$password) {
-                return true;
-            }
-
-            $encoder = new MessageDigestPasswordEncoder();
-            $salt = $entity->get($saltField);
-            $newSalt = $that->possibleGenSalt($salt, $entity, $saltField);
-
-            $passwordHash = $encoder->encodePassword($password, $salt);
-
-            $doGenerateHash = $that->doGenerateHash($data, $entity, $passwordField, $password, $newSalt);
-
-            if ($doGenerateHash) {
-                $entity->set($passwordField, $passwordHash);
-            }
-            return true;
-        };
+        $pwHashFunction = $this->getPWHashFunction($data, $passwordField, $saltField);
 
         $data->pushEvent('before', 'create', $pwHashFunction);
         $data->pushEvent('before', 'update', $pwHashFunction);
