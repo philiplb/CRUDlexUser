@@ -25,8 +25,17 @@ offering in order to connect the users with the application.
 
 ### The Admin Panel
 
-The admin panel for your users is based on [CRUDlex](https://github.com/philiplb/CRUDlex). So all you have
-to do is to add the needed entities to your crud.yml:
+The admin panel for your users is based on [CRUDlex](https://github.com/philiplb/CRUDlex).
+So all you have to do is to add the needed entities to your crud.yml from the
+following sub chapters.
+
+In order to get the salt generated and the password hashed, you have to let the
+library add some CRUDlex events in your initialization:
+
+```PHP
+$crudUserSetup = new CRUDlex\UserSetup();
+$crudUserSetup->addEvents($app['crud']->getData('user'));
+```
 
 #### Users
 
@@ -90,14 +99,6 @@ userRole:
                 nameField: role
                 entity: role
             required: true
-```
-
-In order to get the salt generated and the password hashed, you have to let the
-library add some CRUDlex events in your initialization:
-
-```PHP
-$crudUserSetup = new CRUDlex\UserSetup();
-$crudUserSetup->addEvents($app['crud']->getData('user'));
 ```
 
 ### The UserProvider
