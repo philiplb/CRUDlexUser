@@ -117,6 +117,17 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 ));
 ```
 
+### Accessing Data of he Logged in User
+
+In order to get the user data from the logged in user in your controller, you
+might grab him like this:
+
+```PHP
+$user = $app['security.token_storage']->getToken()
+```
+
+You get back a CRUDlex\\User instance having some getters, see the API docs.
+
 ## Build Status
 
 [![Build Status](https://travis-ci.org/philiplb/CRUDlexUser.svg?branch=master)](https://travis-ci.org/philiplb/CRUDlexUser)
