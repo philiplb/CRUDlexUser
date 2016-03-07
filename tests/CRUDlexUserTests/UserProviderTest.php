@@ -38,6 +38,7 @@ class UserProviderTest extends \PHPUnit_Framework_TestCase {
         $user = $this->dataUser->createEmpty();
         $user->set('username', $expected);
         $user->set('password', 'asdasd');
+        $user->set('email', 'asd@asd.de');
         $this->dataUser->create($user);
 
         $role = $this->dataRole->createEmpty();
@@ -72,6 +73,7 @@ class UserProviderTest extends \PHPUnit_Framework_TestCase {
         $user = $this->dataUser->createEmpty();
         $user->set('username', $expected);
         $user->set('password', 'asdasd');
+        $user->set('email', 'asd@asd.de');
         $this->dataUser->create($user);
 
         $userProvider = new UserProvider($this->dataUser, $this->dataUserRole);
