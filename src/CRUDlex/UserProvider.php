@@ -23,7 +23,7 @@ use CRUDlex\User;
 class UserProvider implements UserProviderInterface {
 
     /**
-     * The CRUDEntity fieldname of the username.
+     * The Entity fieldname of the username.
      */
     protected $usernameField;
 
@@ -38,12 +38,12 @@ class UserProvider implements UserProviderInterface {
     protected $saltField;
 
     /**
-     * Holds the CRUDData instance to grab the user data from.
+     * Holds the Data instance to grab the user data from.
      */
     protected $userData;
 
     /**
-     * Holds the CRUDData instance to grab the user role data from.
+     * Holds the Data instance to grab the user role data from.
      */
     protected $userRoleData;
 
@@ -117,7 +117,7 @@ class UserProvider implements UserProviderInterface {
         $salt = $user->get($this->saltField);
         $roles = $this->loadUserRoles($user->get('id'));
 
-        $userObj = new User($username, $password, $salt, $roles);
+        $userObj = new User($this->usernameField, $this->passwordField, $this->saltField, $user, $roles);
         return $userObj;
     }
 

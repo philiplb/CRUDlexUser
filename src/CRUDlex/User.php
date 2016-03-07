@@ -12,6 +12,7 @@
 namespace CRUDlex;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use CRUDlex\Entity;
 
 /**
  * The UserInterface implementation for the UserProvider.
@@ -19,19 +20,24 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface {
 
     /**
-     * Hold the username.
+     * Holds the actual user data.
      */
-    private $username;
+    private $userEntity;
 
     /**
-     * Hold the password.
+     * The CRUDEntity fieldname of the username.
      */
-    private $password;
+    protected $usernameField;
 
     /**
-     * Hold the roles.
+     * The fieldname of the password (hash).
      */
-    private $salt;
+    protected $passwordField;
+
+    /**
+     * The fieldname of the password hash salt.
+     */
+    protected $saltField;
 
     /**
      * Hold password hash salt.
@@ -41,22 +47,26 @@ class User implements UserInterface {
     /**
      * Constructor.
      *
-     * @param string $username
+     * @param string $usernameField
      * the username
      *
-     * @param string $password
+     * @param string $passwordField
      * the password (hash)
      *
-     * @param string $salt
+     * @param string $saltField
      * the password hash salt
+     *
+     * @param Entity $userEntity
+     * the actual user data
      *
      * @param array $roles
      * the roles
      */
-    public function __construct($username, $password, $salt, array $roles) {
-        $this->username = $username;
-        $this->password = $password;
-        $this->salt = $salt;
+    public function __construct($usernameField, $passwordField, $saltField, Entity $userEntity, array $roles) {
+        $this->usernameField = $usernameField;
+        $this->passwordField = $passwordField;
+        $this->saltField = $saltField;
+        $this->userEntity = $userEntity;
         $this->roles = $roles;
     }
 
@@ -77,7 +87,7 @@ class User implements UserInterface {
      * the password
      */
     public function getPassword() {
-        return $this->password;
+        return $this->userEntity->get($this->passwordField);
     }
 
     /**
@@ -87,7 +97,7 @@ class User implements UserInterface {
      * the salt
      */
     public function getSalt() {
-        return $this->salt;
+        return $this->userEntity->get($this->saltField);
     }
 
     /**
@@ -97,7 +107,7 @@ class User implements UserInterface {
      * the username
      */
     public function getUsername() {
-        return $this->username;
+        return $this->userEntity->get($this->usernameField);
     }
 
     /**
@@ -105,6 +115,16 @@ class User implements UserInterface {
      * implementation.
      */
     public function eraseCredentials() {
+    }
+
+    /**
+     * Gets the user entity holding all data.
+     *
+     * @return Entity
+     * the user entity
+     */
+    public function getUserEntity() {
+        return $this->userEntity;
     }
 
 }

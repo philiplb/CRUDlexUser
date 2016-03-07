@@ -11,40 +11,57 @@
 
 namespace CRUDlexUserTests;
 
+use CRUDlex\Entity;
 use CRUDlex\User;
+use CRUDlexUserTestEnv\TestDBSetup;
 
 class UserTest extends \PHPUnit_Framework_TestCase {
 
+    private $userEntity;
+
+    public function __construct() {
+        $crudServiceProvider = TestDBSetup::createServiceProvider();
+        $dataUser = $crudServiceProvider->getData('user');
+        $this->userEntity = $dataUser->createEmpty();
+        $this->userEntity->set('username', 'username');
+        $this->userEntity->set('password', 'password');
+        $this->userEntity->set('salt', 'salt');
+    }
+
     public function testGetRoles() {
-        $expected = array('ROLE_TEST');
-        $user = new User(null, null, null, $expected);
+        $roles = array('ROLE_TEST');
+        $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $read = $user->getRoles();
-        $this->assertSame($read, $expected);
+        $this->assertSame($read, $roles);
     }
 
     public function testGetPassword() {
+        $roles = array('ROLE_TEST');
+        $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $expected = 'password';
-        $user = new User(null, $expected, null, array());
         $read = $user->getPassword();
         $this->assertSame($read, $expected);
     }
 
     public function testGetSalt() {
+        $roles = array('ROLE_TEST');
+        $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $expected = 'salt';
-        $user = new User(null, null, $expected, array());
         $read = $user->getSalt();
         $this->assertSame($read, $expected);
     }
 
     public function testGetUsername() {
+        $roles = array('ROLE_TEST');
+        $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $expected = 'username';
-        $user = new User($expected, null, null, array());
         $read = $user->getUsername();
         $this->assertSame($read, $expected);
     }
 
     public function testEraseCredentials() {
-        $user = new User(null, null, null, array());
+        $roles = array('ROLE_TEST');
+        $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $user->eraseCredentials();
     }
 
