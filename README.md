@@ -62,6 +62,15 @@ user:
 ```
 
 Plus any more fields you need.
+Recommended for the password reset features:
+
+```yml
+email:
+    type: text
+    label: E-Mail
+    required: true
+    unique: true
+```
 
 #### Roles
 
@@ -99,6 +108,32 @@ userRole:
                 nameField: role
                 entity: role
             required: true
+```
+
+#### Password Reset
+
+In case you want to use the password reset features:
+
+```yml
+passwordReset:
+    label: Password Resets
+    table: passwordReset
+    fields:
+        user:
+            type: reference
+            label: User
+            reference:
+                table: user
+                nameField: username
+                entity: user
+            required: true
+        token:
+            type: text
+            label: Token
+            required: true
+        reset:
+            type: datetime
+            label: Reset
 ```
 
 ### The UserProvider

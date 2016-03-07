@@ -27,6 +27,7 @@ class TestDBSetup {
             ),
         ));
 
+        $app['db']->executeUpdate('DROP TABLE IF EXISTS passwordReset;');
         $app['db']->executeUpdate('DROP TABLE IF EXISTS userRole;');
         $app['db']->executeUpdate('DROP TABLE IF EXISTS role;');
         $app['db']->executeUpdate('DROP TABLE IF EXISTS user;');
@@ -54,6 +55,7 @@ class TestDBSetup {
             '  `password` varchar(255) NOT NULL,'.
             '  `salt` varchar(255) NOT NULL,'.
             '  `username` varchar(255) NOT NULL,'.
+            '  `email` varchar(255) NOT NULL,'.
             '  PRIMARY KEY (`id`)'.
             ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
         $app['db']->executeUpdate($sql);
@@ -71,6 +73,21 @@ class TestDBSetup {
             '  KEY `role` (`role`),'.
             '  CONSTRAINT `userrole_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`id`),'.
             '  CONSTRAINT `userrole_ibfk_2` FOREIGN KEY (`role`) REFERENCES `role` (`id`)'.
+            ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+        $app['db']->executeUpdate($sql);
+
+        $sql = 'CREATE TABLE `passwordReset` ('.
+            '  `id` int(11) NOT NULL AUTO_INCREMENT,'.
+            '  `version` int(11) NOT NULL,'.
+            '  `created_at` datetime NOT NULL,'.
+            '  `updated_at` datetime NOT NULL,'.
+            '  `deleted_at` datetime DEFAULT NULL,'.
+            '  `user` int(11) NOT NULL,'.
+            '  `token` varchar(255) NOT NULL,'.
+            '  `reset` datetime DEFAULT NULL,'.
+            '  PRIMARY KEY (`id`),'.
+            '  KEY `user` (`user`),'.
+            '  CONSTRAINT `passwordreset_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`id`)'.
             ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
         $app['db']->executeUpdate($sql);
         return $app;

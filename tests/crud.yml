@@ -16,6 +16,11 @@ user:
             label: Password Salt
             description: 'Auto populated field on user creation. Used internally.'
             required: false
+        email:
+            type: text
+            label: E-Mail
+            required: true
+            unique: true
 role:
     label: Roles
     table: role
@@ -44,3 +49,22 @@ userRole:
                 nameField: role
                 entity: role
             required: true
+passwordReset:
+    label: Password Resets
+    table: passwordReset
+    fields:
+        user:
+            type: reference
+            label: User
+            reference:
+                table: user
+                nameField: username
+                entity: user
+            required: true
+        token:
+            type: text
+            label: Token
+            required: true
+        reset:
+            type: datetime
+            label: Reset

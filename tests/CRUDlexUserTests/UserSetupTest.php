@@ -31,6 +31,7 @@ class UserSetupTest extends \PHPUnit_Framework_TestCase {
         $user = $this->dataUser->createEmpty();
         $user->set('username', 'user1');
         $user->set('password', $password);
+        $user->set('email', 'asd@asd.de');
         $this->dataUser->create($user);
 
         $readUser = $this->dataUser->get($user->get('id'));
