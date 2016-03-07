@@ -113,8 +113,6 @@ class UserProvider implements UserProviderInterface {
         }
 
         $user = $users[0];
-        $password = $user->get($this->passwordField);
-        $salt = $user->get($this->saltField);
         $roles = $this->loadUserRoles($user->get('id'));
 
         $userObj = new User($this->usernameField, $this->passwordField, $this->saltField, $user, $roles);
