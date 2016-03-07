@@ -78,4 +78,47 @@ class PasswordReset {
         return $token;
     }
 
+    /**
+     * Resets the password of an user belonging to the given password reset
+     * token.
+     *
+     * @param string $token
+     * the password reset token
+     * @param string $newPassword
+     * the new password
+     *
+     * @return boolean
+     * true on success, false on failure with one of this reasons:
+     * - no or more than one password reset request found for this token
+     * - the password request for this token is older than 48h
+     * - the password request for this token has already been used
+     */
+    public function resetPassword($token, $newPassword) {
+
+        $passwordResets = $this->passwordResetData->listEntries(array('token' => $token));
+        if (count($passwordResets) !== 1) {
+            return false;
+        }
+        $passwordReset = $passwordResets[0];
+
+        $createdAt = $passwordReset->get('created_at');
+        if (strtotime($createdAt.' UTC') < time() - 2 * 24 * 60 * 60) {
+            return false;
+        }
+
+        if ($passwordReset->get('reset')) {
+            return false;
+        }
+
+        $user = $this->userData->get($passwordReset->get('user'));
+        $user->set('password', $newPassword);
+        $this->userData->update($user);
+
+        $reset = gmdate('Y-m-d H:i:s');
+        $passwordReset->set('reset', $reset);
+        $this->passwordResetData->update($passwordReset);
+
+        return true;
+    }
+
 }
