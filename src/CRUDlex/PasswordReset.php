@@ -29,6 +29,30 @@ class PasswordReset {
     protected $passwordResetData;
 
     /**
+     * Gets the password reset of a token but only if it is younger than 48h.
+     *
+     * @param string $token
+     * the password reset token
+     *
+     * @return null|CRUDlex\Entity
+     * the password reset request
+     */
+    protected function getValidPasswordReset($token) {
+        $passwordResets = $this->passwordResetData->listEntries(array('token' => $token));
+        if (count($passwordResets) !== 1) {
+            return null;
+        }
+        $passwordReset = $passwordResets[0];
+
+        $createdAt = $passwordReset->get('created_at');
+        if (strtotime($createdAt . ' UTC') < time() - 2 * 24 * 60 * 60 || $passwordReset->get('reset')) {
+            return null;
+        }
+
+        return $passwordReset;
+    }
+
+    /**
      * Constructor.
      *
      * @param CRUDlex\Data $userData
@@ -94,15 +118,8 @@ class PasswordReset {
      * - the password request for this token has already been used
      */
     public function resetPassword($token, $newPassword) {
-
-        $passwordResets = $this->passwordResetData->listEntries(array('token' => $token));
-        if (count($passwordResets) !== 1) {
-            return false;
-        }
-        $passwordReset = $passwordResets[0];
-
-        $createdAt = $passwordReset->get('created_at');
-        if (strtotime($createdAt . ' UTC') < time() - 2 * 24 * 60 * 60 || $passwordReset->get('reset')) {
+        $passwordReset = $this->getValidPasswordReset($token);
+        if ($passwordReset === null) {
             return false;
         }
 
