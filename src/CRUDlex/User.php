@@ -22,7 +22,7 @@ class User implements UserInterface {
     /**
      * Holds the actual user data.
      */
-    private $userEntity;
+    private $userData;
 
     /**
      * The CRUDEntity fieldname of the username.
@@ -66,7 +66,11 @@ class User implements UserInterface {
         $this->usernameField = $usernameField;
         $this->passwordField = $passwordField;
         $this->saltField = $saltField;
-        $this->userEntity = $userEntity;
+        // We have to copy it over as symfony/security wants something serializable.
+        $this->userData = array();
+        foreach ($userEntity->getDefinition()->getFieldNames() as $field) {
+            $this->userData[$field] = $userEntity->get($field);
+        }
         $this->roles = $roles;
     }
 
@@ -87,7 +91,7 @@ class User implements UserInterface {
      * the password
      */
     public function getPassword() {
-        return $this->userEntity->get($this->passwordField);
+        return $this->userData[$this->passwordField];
     }
 
     /**
@@ -97,7 +101,7 @@ class User implements UserInterface {
      * the salt
      */
     public function getSalt() {
-        return $this->userEntity->get($this->saltField);
+        return $this->userData[$this->saltField];
     }
 
     /**
@@ -107,7 +111,7 @@ class User implements UserInterface {
      * the username
      */
     public function getUsername() {
-        return $this->userEntity->get($this->usernameField);
+        return $this->userData[$this->usernameField];
     }
 
     /**
@@ -118,13 +122,13 @@ class User implements UserInterface {
     }
 
     /**
-     * Gets the user entity holding all data.
+     * Gets the user data.
      *
-     * @return Entity
-     * the user entity
+     * @return array
+     * the user data
      */
-    public function getUserEntity() {
-        return $this->userEntity;
+    public function getUserData() {
+        return $this->userData;
     }
 
 }

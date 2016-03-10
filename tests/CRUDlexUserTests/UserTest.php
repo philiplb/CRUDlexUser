@@ -65,12 +65,12 @@ class UserTest extends \PHPUnit_Framework_TestCase {
         $user->eraseCredentials();
     }
 
-    public function testGetUserEntity() {
+    public function testGetUserData() {
         $roles = array('ROLE_TEST');
         $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $expected = 'username';
-        $read = $user->getUserEntity()->get('username');
-        $this->assertSame($read, $expected);
+        $read = $user->getUserData();
+        $this->assertSame($read['username'], $expected);
     }
 
 }
