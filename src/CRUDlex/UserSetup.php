@@ -12,7 +12,7 @@
 namespace CRUDlex;
 
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-use CRUDlex\Data;
+use CRUDlex\AbstractData;
 use CRUDlex\Entity;
 
 /**
@@ -24,8 +24,8 @@ class UserSetup {
     /**
      * Gets a closure for possibly generating a password hash in the entity.
      *
-     * @param Data $data
-     * the Data instance managing the users
+     * @param AbstractData $data
+     * the AbstractData instance managing the users
      *
      * @param string $passwordField
      * the Entity fieldname of the password hash
@@ -33,7 +33,7 @@ class UserSetup {
      * @param string $saltField
      * the Entity fieldname of the password hash salt
      */
-    protected function getPWHashFunction(Data $data, $passwordField, $saltField) {
+    protected function getPWHashFunction(AbstractData $data, $passwordField, $saltField) {
         $that = $this;
         return function(Entity $entity) use ($data, $passwordField, $saltField, $that) {
             $password = $entity->get($passwordField);
@@ -82,7 +82,7 @@ class UserSetup {
     /**
      * Determines whether the entity needs a new hash generated.
      *
-     * @param Data $data
+     * @param AbstractData $data
      * the CRUDlex data instance of the user entity
      * @param Entity $entity
      * the entity
@@ -96,7 +96,7 @@ class UserSetup {
      * @return boolean
      * true if the entity needs a new hash
      */
-    public function doGenerateHash(Data $data, Entity $entity, $passwordField, $password, $newSalt) {
+    public function doGenerateHash(AbstractData $data, Entity $entity, $passwordField, $password, $newSalt) {
         $doGenerateHash = true;
         $id = $entity->get('id');
         if ($id !== null) {
@@ -129,8 +129,8 @@ class UserSetup {
      * Setups CRUDlex with some events so the passwords get salted and
      * hashed properly.
      *
-     * @param Data $data
-     * the Data instance managing the users
+     * @param AbstractData $data
+     * the AbstractData instance managing the users
      *
      * @param string $passwordField
      * the Entity fieldname of the password hash
@@ -138,7 +138,7 @@ class UserSetup {
      * @param string $saltField
      * the Entity fieldname of the password hash salt
      */
-    public function addEvents(Data $data, $passwordField = 'password', $saltField = 'salt') {
+    public function addEvents(AbstractData $data, $passwordField = 'password', $saltField = 'salt') {
 
         $that = $this;
         $saltGenFunction = function(Entity $entity) use ($saltField, $that) {

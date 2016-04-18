@@ -14,7 +14,7 @@ namespace CRUDlex;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use CRUDlex\Data;
+use CRUDlex\AbstractData;
 use CRUDlex\User;
 
 /**
@@ -38,12 +38,12 @@ class UserProvider implements UserProviderInterface {
     protected $saltField;
 
     /**
-     * Holds the Data instance to grab the user data from.
+     * Holds the AbstractData instance to grab the user data from.
      */
     protected $userData;
 
     /**
-     * Holds the Data instance to grab the user role data from.
+     * Holds the AbstractData instance to grab the user role data from.
      */
     protected $userRoleData;
 
@@ -72,11 +72,11 @@ class UserProvider implements UserProviderInterface {
     /**
      * Constructor.
      *
-     * @param Data $userData
-     * the Data instance to grab the user data from
+     * @param AbstractData $userData
+     * the AbstractData instance to grab the user data from
      *
-     * @param Data $userRoleData
-     * the Data instance to grab the user role data from
+     * @param AbstractData $userRoleData
+     * the AbstractData instance to grab the user role data from
      *
      * @param string $usernameField
      * the Entity fieldname of the username
@@ -87,7 +87,7 @@ class UserProvider implements UserProviderInterface {
      * @param string $saltField
      * the Entity fieldname of the password hash salt
      */
-    public function __construct(Data $userData, Data $userRoleData, $usernameField = 'username', $passwordField = 'password', $saltField = 'salt') {
+    public function __construct(AbstractData $userData, AbstractData $userRoleData, $usernameField = 'username', $passwordField = 'password', $saltField = 'salt') {
         $this->userData = $userData;
         $this->userRoleData = $userRoleData;
         $this->usernameField = $usernameField;
