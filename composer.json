@@ -25,5 +25,10 @@
     },
     "autoload": {
         "psr-0": { "CRUDlex": "src" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.9.x-dev"
+        }
     }
 }
