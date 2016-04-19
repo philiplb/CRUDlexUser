@@ -27,8 +27,8 @@ class TestDBSetup {
             ),
         ));
 
-        $app['db']->executeUpdate('DROP TABLE IF EXISTS passwordReset;');
-        $app['db']->executeUpdate('DROP TABLE IF EXISTS userRole;');
+        $app['db']->executeUpdate('DROP TABLE IF EXISTS password_reset;');
+        $app['db']->executeUpdate('DROP TABLE IF EXISTS user_role;');
         $app['db']->executeUpdate('DROP TABLE IF EXISTS role;');
         $app['db']->executeUpdate('DROP TABLE IF EXISTS user;');
 
@@ -60,7 +60,7 @@ class TestDBSetup {
             ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
         $app['db']->executeUpdate($sql);
 
-        $sql = 'CREATE TABLE `userRole` ('.
+        $sql = 'CREATE TABLE `user_role` ('.
             '  `id` int(11) NOT NULL AUTO_INCREMENT,'.
             '  `version` int(11) NOT NULL,'.
             '  `created_at` datetime NOT NULL,'.
@@ -76,7 +76,7 @@ class TestDBSetup {
             ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
         $app['db']->executeUpdate($sql);
 
-        $sql = 'CREATE TABLE `passwordReset` ('.
+        $sql = 'CREATE TABLE `password_reset` ('.
             '  `id` int(11) NOT NULL AUTO_INCREMENT,'.
             '  `version` int(11) NOT NULL,'.
             '  `created_at` datetime NOT NULL,'.

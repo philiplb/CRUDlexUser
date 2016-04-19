@@ -98,7 +98,7 @@ class PasswordResetTest extends \PHPUnit_Framework_TestCase {
         }
         $passwordReset = $passwordResets[0];
         $oldCreatedAt = gmdate('Y-m-d H:i:s', time() - 3 * 24 * 60 * 60);
-        $app['db']->executeUpdate('UPDATE passwordReset SET created_at = ? WHERE token = ?', array($oldCreatedAt, $token));
+        $app['db']->executeUpdate('UPDATE password_reset SET created_at = ? WHERE token = ?', array($oldCreatedAt, $token));
 
         $read = $this->passwordReset->resetPassword($token, 'dsadsa');
         $this->assertFalse($read);

@@ -31,7 +31,7 @@ role:
             required: true
 userRole:
     label: User Roles
-    table: userRole
+    table: user_role
     fields:
         user:
             type: reference
@@ -51,7 +51,7 @@ userRole:
             required: true
 passwordReset:
     label: Password Resets
-    table: passwordReset
+    table: password_reset
     fields:
         user:
             type: reference

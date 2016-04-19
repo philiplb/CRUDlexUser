@@ -90,7 +90,7 @@ role:
 ```yml
 userRole:
     label: User Roles
-    table: userRole
+    table: user_role
     fields:
         user:
             type: reference
@@ -117,7 +117,7 @@ In case you want to use the password reset features:
 ```yml
 passwordReset:
     label: Password Resets
-    table: passwordReset
+    table: password_reset
     fields:
         user:
             type: reference
