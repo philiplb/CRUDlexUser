@@ -7,7 +7,6 @@ Released: Upcoming
 - Fixed some issues found by static code analysis
 - Changed the User class so you can actually get the underlying entity and so all your fields
 - Changed the setup recommendation to underscore template names
-- Don't give the ROLE_USER by default
 
 ## 0.9.9
 Released: 2016-03-01
