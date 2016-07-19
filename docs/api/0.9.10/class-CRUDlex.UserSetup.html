@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class CRUDlex\UserSetup | CRUDlexUser API</title>
+
+	<link rel="stylesheet" href="resources/style.css?c2f33731c1948fbed7c333554678bfa68d4817da">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-CRUDlex.html">
+						CRUDlex					</a>
+
+						</li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-CRUDlex.PasswordReset.html">PasswordReset</a></li>
+				<li><a href="class-CRUDlex.User.html">User</a></li>
+				<li><a href="class-CRUDlex.UserProvider.html">UserProvider</a></li>
+				<li class="active"><a href="class-CRUDlex.UserSetup.html">UserSetup</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-CRUDlex.html" title="Summary of CRUDlex"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class UserSetup</h1>
+
+
+	<div class="description">
+	<p>This class setups CRUDlex with some events so the passwords get salted and
+hashed properly.</p>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-CRUDlex.html">CRUDlex</a><br>
+		
+
+			<b>Located at</b> UserSetup.php		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="getPWHashFunction" id="_getPWHashFunction">
+
+		<td class="attributes"><code>
+			 protected 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPWHashFunction">#</a>
+		<code>getPWHashFunction( <span>CRUDlex\AbstractData <var>$data</var></span>, <span>string <var>$passwordField</var></span>, <span>string <var>$saltField</var></span> )</code>
+
+		<div class="description short">
+			<p>Gets a closure for possibly generating a password hash in the entity.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Gets a closure for possibly generating a password hash in the entity.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd>the AbstractData instance managing the users</dd>
+					<dt><var>$passwordField</var></dt>
+					<dd>the Entity fieldname of the password hash</dd>
+					<dt><var>$saltField</var></dt>
+					<dd>the Entity fieldname of the password hash salt</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="possibleGenSalt" id="_possibleGenSalt">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_possibleGenSalt">#</a>
+		<code>possibleGenSalt( <span>string <var>&amp; $salt</var></span>, <span>CRUDlex\Entity <var>$entity</var></span>, <span>string <var>$saltField</var></span> )</code>
+
+		<div class="description short">
+			<p>Generates a new salt if the given salt is null.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Generates a new salt if the given salt is null.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$salt</var></dt>
+					<dd>the salt to override if null</dd>
+					<dt><var>$entity</var></dt>
+					<dd>entity getting the new salt</dd>
+					<dt><var>$saltField</var></dt>
+					<dd>the field holding the salt in the entity</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean<br>true if a new salt was generated
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="doGenerateHash" id="_doGenerateHash">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_doGenerateHash">#</a>
+		<code>doGenerateHash( <span>CRUDlex\AbstractData <var>$data</var></span>, <span>CRUDlex\Entity <var>$entity</var></span>, <span>string <var>$passwordField</var></span>, <span>string <var>$password</var></span>, <span>boolean <var>$newSalt</var></span> )</code>
+
+		<div class="description short">
+			<p>Determines whether the entity needs a new hash generated.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Determines whether the entity needs a new hash generated.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd>the CRUDlex data instance of the user entity</dd>
+					<dt><var>$entity</var></dt>
+					<dd>the entity</dd>
+					<dt><var>$passwordField</var></dt>
+					<dd>the field holding the password hash in the entity</dd>
+					<dt><var>$password</var></dt>
+					<dd>the current password hash</dd>
+					<dt><var>$newSalt</var></dt>
+					<dd>whether a new password hash salt was generated</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean<br>true if the entity needs a new hash
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSalt" id="_getSalt">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSalt">#</a>
+		<code>getSalt( <span>integer <var>$len</var></span> )</code>
+
+		<div class="description short">
+			<p>Generates a random salt of the given length.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Generates a random salt of the given length.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$len</var></dt>
+					<dd>the desired length</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string<br>a random salt of the given length
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addEvents" id="_addEvents">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addEvents">#</a>
+		<code>addEvents( <span>CRUDlex\AbstractData <var>$data</var></span>, <span>string <var>$passwordField</var> = <span class="php-quote">'password'</span></span>, <span>string <var>$saltField</var> = <span class="php-quote">'salt'</span></span> )</code>
+
+		<div class="description short">
+			<p>Setups CRUDlex with some events so the passwords get salted and
+hashed properly.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Setups CRUDlex with some events so the passwords get salted and
+hashed properly.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd>the AbstractData instance managing the users</dd>
+					<dt><var>$passwordField</var></dt>
+					<dd>the Entity fieldname of the password hash</dd>
+					<dt><var>$saltField</var></dt>
+					<dd>the Entity fieldname of the password hash salt</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		CRUDlexUser API API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

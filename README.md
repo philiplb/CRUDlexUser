@@ -14,6 +14,7 @@ CRUDlex 0.9.9 etc.. The master branch works against the master of CRUDlex.
 
 The CRUDlexUser API itself is documented here:
 
+* [0.9.10](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.10/)
 * [0.9.9](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.9/)
 * [0.9.8](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.8/)
 
