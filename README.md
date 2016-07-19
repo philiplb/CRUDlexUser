@@ -153,7 +153,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 ));
 ```
 
-### Accessing Data of he Logged in User
+### Accessing Data of the Logged in User
 
 In order to get the user data from the logged in user in your controller, you
 might grab him like this:
