@@ -67,7 +67,7 @@ class User implements UserInterface {
         $this->passwordField = $passwordField;
         $this->saltField = $saltField;
         // We have to copy it over as symfony/security wants something serializable.
-        $this->userData = array();
+        $this->userData = [];
         foreach ($userEntity->getDefinition()->getFieldNames() as $field) {
             $this->userData[$field] = $userEntity->get($field);
         }

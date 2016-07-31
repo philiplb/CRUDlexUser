@@ -3,6 +3,8 @@ CRUDlexUser Changelog
 
 ## 0.9.11
 Released: Upcoming
+- Updated to CRUDlex 0.9.11
+- Switched to the array shorthand
 
 ## 0.9.10
 Released: 2016-07-19

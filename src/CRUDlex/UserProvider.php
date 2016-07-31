@@ -57,9 +57,9 @@ class UserProvider implements UserProviderInterface {
      * the roles of the user
      */
     protected function loadUserRoles($userId) {
-        $crudRoles = $this->userRoleData->listEntries(array('user' => $userId), array('user' => '='));
+        $crudRoles = $this->userRoleData->listEntries(['user' => $userId], ['user' => '=']);
         $this->userRoleData->fetchReferences($crudRoles);
-        $roles = array('ROLE_USER');
+        $roles = ['ROLE_USER'];
         if ($crudRoles !== null) {
             foreach ($crudRoles as $crudRole) {
                 $role = $crudRole->get('role');
@@ -107,7 +107,7 @@ class UserProvider implements UserProviderInterface {
      */
     public function loadUserByUsername($username) {
 
-        $users = $this->userData->listEntries(array($this->usernameField => $username), array($this->usernameField => '='), 0, 1);
+        $users = $this->userData->listEntries([$this->usernameField => $username], [$this->usernameField => '='], 0, 1);
         if (count($users) === 0) {
             throw new UsernameNotFoundException();
         }

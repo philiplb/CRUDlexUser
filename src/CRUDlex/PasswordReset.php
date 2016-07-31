@@ -38,7 +38,7 @@ class PasswordReset {
      * the password reset request
      */
     protected function getValidPasswordReset($token) {
-        $passwordResets = $this->passwordResetData->listEntries(array('token' => $token));
+        $passwordResets = $this->passwordResetData->listEntries(['token' => $token]);
         if (count($passwordResets) !== 1) {
             return null;
         }
@@ -81,7 +81,7 @@ class PasswordReset {
      */
     public function requestPasswordReset($identifyingField, $identifyingValue) {
 
-        $users = $this->userData->listEntries(array($identifyingField => $identifyingValue));
+        $users = $this->userData->listEntries([$identifyingField => $identifyingValue]);
         if (count($users) !== 1) {
             return null;
         }
@@ -91,7 +91,7 @@ class PasswordReset {
 
         do {
             $token = $userSetup->getSalt(32);
-            $tokenFound = $this->passwordResetData->countBy($this->passwordResetData->getDefinition()->getTable(), array('token' => $token), array('token' => '='), true) === 0;
+            $tokenFound = $this->passwordResetData->countBy($this->passwordResetData->getDefinition()->getTable(), ['token' => $token], ['token' => '='], true) === 0;
         } while (!$tokenFound);
 
         $passwordReset = $this->passwordResetData->createEmpty();

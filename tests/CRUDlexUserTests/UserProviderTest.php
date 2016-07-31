@@ -56,7 +56,7 @@ class UserProviderTest extends \PHPUnit_Framework_TestCase {
         $read = $userRead->getUsername();
         $this->assertSame($read, $expected);
         $read = $userRead->getRoles();
-        $expected = array('ROLE_USER', 'ROLE_TEST');
+        $expected = ['ROLE_USER', 'ROLE_TEST'];
         $this->assertSame($read, $expected);
 
         try {
@@ -79,7 +79,7 @@ class UserProviderTest extends \PHPUnit_Framework_TestCase {
         $userProvider = new UserProvider($this->dataUser, $this->dataUserRole);
         $userRead = $userProvider->loadUserByUsername($expected);
 
-        $expected = array('ROLE_USER');
+        $expected = ['ROLE_USER'];
         $read = $userRead->getRoles();
         $this->assertSame($read, $expected);
 
@@ -93,7 +93,7 @@ class UserProviderTest extends \PHPUnit_Framework_TestCase {
         $this->dataUserRole->create($userRole);
 
         $userRead2 = $userProvider->refreshUser($userRead);
-        $expected = array('ROLE_USER', 'ROLE_TEST');
+        $expected = ['ROLE_USER', 'ROLE_TEST'];
         $read = $userRead2->getRoles();
         $this->assertSame($read, $expected);
 

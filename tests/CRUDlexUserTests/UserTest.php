@@ -29,14 +29,14 @@ class UserTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testGetRoles() {
-        $roles = array('ROLE_TEST');
+        $roles = ['ROLE_TEST'];
         $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $read = $user->getRoles();
         $this->assertSame($read, $roles);
     }
 
     public function testGetPassword() {
-        $roles = array('ROLE_TEST');
+        $roles = ['ROLE_TEST'];
         $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $expected = 'password';
         $read = $user->getPassword();
@@ -44,7 +44,7 @@ class UserTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testGetSalt() {
-        $roles = array('ROLE_TEST');
+        $roles = ['ROLE_TEST'];
         $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $expected = 'salt';
         $read = $user->getSalt();
@@ -52,7 +52,7 @@ class UserTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testGetUsername() {
-        $roles = array('ROLE_TEST');
+        $roles = ['ROLE_TEST'];
         $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $expected = 'username';
         $read = $user->getUsername();
@@ -60,13 +60,13 @@ class UserTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testEraseCredentials() {
-        $roles = array('ROLE_TEST');
+        $roles = ['ROLE_TEST'];
         $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $user->eraseCredentials();
     }
 
     public function testGetUserData() {
-        $roles = array('ROLE_TEST');
+        $roles = ['ROLE_TEST'];
         $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $expected = 'username';
         $read = $user->getUserData();
