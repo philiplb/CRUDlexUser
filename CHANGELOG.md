@@ -1,10 +1,15 @@
 CRUDlexUser Changelog
 =====================
 
-## 0.9.11
+## 0.10.0
 Released: Upcoming
-- Updated to CRUDlex 0.9.11
+- Updated to the CRUDlex 0.10.0 API
+- Attention: The minimum PHP version is now 5.5
 - Switched to the array shorthand
+- Updated dependencies:
+	- "symfony/security": "~3.1"
+	- "symfony/browser-kit": "~3.1"
+	- "symfony/css-selector": "~3.1"
 
 ## 0.9.10
 Released: 2016-07-19
