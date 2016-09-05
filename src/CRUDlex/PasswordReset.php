@@ -45,7 +45,7 @@ class PasswordReset {
         $passwordReset = $passwordResets[0];
 
         $createdAt = $passwordReset->get('created_at');
-        if (strtotime($createdAt . ' UTC') < time() - 2 * 24 * 60 * 60 || $passwordReset->get('reset')) {
+        if (strtotime($createdAt.' UTC') < time() - 2 * 24 * 60 * 60 || $passwordReset->get('reset')) {
             return null;
         }
 
