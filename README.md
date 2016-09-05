@@ -97,7 +97,6 @@ userRole:
             type: reference
             label: User
             reference:
-                table: user
                 nameField: username
                 entity: user
             required: true
@@ -105,7 +104,6 @@ userRole:
             type: reference
             label: Role
             reference:
-                table: role
                 nameField: role
                 entity: role
             required: true
@@ -124,7 +122,6 @@ passwordReset:
             type: reference
             label: User
             reference:
-                table: user
                 nameField: username
                 entity: user
             required: true
