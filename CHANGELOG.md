@@ -5,6 +5,7 @@ CRUDlexUser Changelog
 Released: Upcoming
 - Updated to the CRUDlex 0.10.0 API
 - Attention: The minimum PHP version is now 5.5
+- Attention: Switched from PSR-0 to PSR-4
 - Switched to the array shorthand
 - Updated dependencies:
 	- "symfony/security": "~3.1"
