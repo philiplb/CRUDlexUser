@@ -69,10 +69,10 @@ class UserSetup {
      * the encoder to use, defaults to BCryptPasswordEncoder if null is given
      */
     public function __construct(PasswordEncoderInterface $encoder = null) {
-    	$this->encoder = $encoder;
-    	if ($this->encoder === null) {
-    		$this->encoder = new BCryptPasswordEncoder(13);
-    	}
+        $this->encoder = $encoder;
+        if ($this->encoder === null) {
+            $this->encoder = new BCryptPasswordEncoder(13);
+        }
     }
 
     /**
