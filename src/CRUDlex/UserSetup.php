@@ -22,10 +22,10 @@ use CRUDlex\Entity;
  */
 class UserSetup {
 
-	/**
-	 * The encoder to use.
-	 */
-	protected $encoder;
+    /**
+     * The encoder to use.
+     */
+    protected $encoder;
 
     /**
      * Gets a closure for possibly generating a password hash in the entity.
