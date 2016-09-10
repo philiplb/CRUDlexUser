@@ -11,7 +11,7 @@
 
 namespace CRUDlexUserTests;
 
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 use CRUDlex\PasswordReset;
 use CRUDlexUserTestEnv\TestDBSetup;
 
@@ -62,12 +62,11 @@ class PasswordResetTest extends \PHPUnit_Framework_TestCase {
         $user->set('email', 'asd2@asd.de');
         $this->dataUser->create($user);
 
-        $oldHash = $user->get('password');
+        $hash = $user->get('password');
         $salt = $user->get('salt');
 
-        $encoder = new MessageDigestPasswordEncoder();
-        $passwordHash = $encoder->encodePassword('asdasd', $salt);
-        $this->assertSame($passwordHash, $oldHash);
+        $encoder = new BCryptPasswordEncoder(13);
+        $this->assertTrue($encoder->isPasswordValid($hash, 'asdasd', $salt));
 
         $token = $this->passwordReset->requestPasswordReset('email', 'asd2@asd.de');
 
@@ -83,8 +82,7 @@ class PasswordResetTest extends \PHPUnit_Framework_TestCase {
 
         $updatedUser = $this->dataUser->get($user->get('id'));
         $newHash = $updatedUser->get('password');
-        $passwordHash = $encoder->encodePassword('dsadsa', $salt);
-        $this->assertSame($passwordHash, $newHash);
+        $this->assertTrue($encoder->isPasswordValid($newHash, 'dsadsa', $salt));
 
         // A token can be only used once
         $read = $this->passwordReset->resetPassword($token, 'dsadsa');
