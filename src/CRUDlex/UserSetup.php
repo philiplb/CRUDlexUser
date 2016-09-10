@@ -11,7 +11,8 @@
 
 namespace CRUDlex;
 
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 use CRUDlex\AbstractData;
 use CRUDlex\Entity;
 
@@ -20,6 +21,11 @@ use CRUDlex\Entity;
  * hashed properly.
  */
 class UserSetup {
+
+	/**
+	 * The encoder to use.
+	 */
+	protected $encoder;
 
     /**
      * Gets a closure for possibly generating a password hash in the entity.
@@ -42,11 +48,10 @@ class UserSetup {
                 return true;
             }
 
-            $encoder = new MessageDigestPasswordEncoder();
             $salt = $entity->get($saltField);
             $newSalt = $that->possibleGenSalt($salt, $entity, $saltField);
 
-            $passwordHash = $encoder->encodePassword($password, $salt);
+            $passwordHash = $this->encoder->encodePassword($password, $salt);
 
             $doGenerateHash = $that->doGenerateHash($data, $entity, $passwordField, $password, $newSalt);
 
@@ -55,6 +60,19 @@ class UserSetup {
             }
             return true;
         };
+    }
+    
+    /**
+     * Constructor.
+     *
+     * @param PasswordEncoderInterface $encoder
+     * the encoder to use, defaults to BCryptPasswordEncoder if null is given
+     */
+    public function __construct(PasswordEncoderInterface $encoder = null) {
+    	$this->encoder = $passwordEncoder;
+    	if ($this->encoder === null) {
+    		$this->encoder = new BCryptPasswordEncoder(13);
+    	}
     }
 
     /**
