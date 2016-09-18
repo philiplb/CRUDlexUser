@@ -3,3 +3,4 @@ composer.phar
 coverageReport
 build
 composer.lock
+apigen.phar

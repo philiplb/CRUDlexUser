@@ -1,8 +1,11 @@
 CRUDlexUser Changelog
 =====================
 
-## 0.10.0
+## 0.11.0
 Released: Upcoming
+
+## 0.10.0
+Released: 2016-09-18
 - Updated to the CRUDlex 0.10.0 API
 - Attention: With Silex 2, the default password encoder changed to BCrypt. Added a constructor to override it if something else is used like the previous default MessageDigestPasswordEncoder
 - Attention: The minimum PHP version is now 5.5
