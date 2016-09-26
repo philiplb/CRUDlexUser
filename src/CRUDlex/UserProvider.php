@@ -43,12 +43,17 @@ class UserProvider implements UserProviderInterface {
     protected $userData;
 
     /**
-     * Holds the AbstractData instance to grab the user role data from.
+     * Holds the AbstractData instance or the field of the many-to-many relationship to grab the user role data from.
      */
     protected $userRoleData;
 
     /**
-     * Loads the roles of an user.
+     * Holds the AbstractData instance or the field of the many-to-many relationship to grab the user role data from.
+     */
+    protected $userRoleIdentifier;
+
+    /**
+     * Loads the roles of an user via an AbstractData instance.
      *
      * @param mixed $userId
      * the id of the user
@@ -56,9 +61,9 @@ class UserProvider implements UserProviderInterface {
      * @return string[]
      * the roles of the user
      */
-    protected function loadUserRoles($userId) {
-        $crudRoles = $this->userRoleData->listEntries(['user' => $userId], ['user' => '=']);
-        $this->userRoleData->fetchReferences($crudRoles);
+    protected function loadUserRolesViaData($userId) {
+        $crudRoles = $this->userRoleIdentifier->listEntries(['user' => $userId], ['user' => '=']);
+        $this->userRoleIdentifier->fetchReferences($crudRoles);
         $roles = ['ROLE_USER'];
         if ($crudRoles !== null) {
             foreach ($crudRoles as $crudRole) {
@@ -70,13 +75,30 @@ class UserProvider implements UserProviderInterface {
     }
 
     /**
-     * Constructor.
+     * Loads the roles of an user via a many-to-many relationship
+     *
+     * @param Entity $user
+     * the id of the user
+     *
+     * @return string[]
+     * the roles of the user
+     */
+    protected function loadUserRolesViaManyToMany($user) {
+        $roles = ['ROLE_USER'];
+        foreach ($user->get($this->userRoleIdentifier) as $role) {
+            $roles[] = $role['name'];
+        }
+        return $roles;
+    }
+
+    /**
+     * Constructor for data structures connecting users and roles via a many-to-many relationship on the user.
      *
      * @param AbstractData $userData
      * the AbstractData instance to grab the user data from
      *
-     * @param AbstractData $userRoleData
-     * the AbstractData instance to grab the user role data from
+     * @param string|AbstractData $userRoleIdentifier
+     * the field of the many-to-many relationship to grab the user role data from or the AbstractData if its an own entity
      *
      * @param string $usernameField
      * the Entity fieldname of the username
@@ -87,9 +109,9 @@ class UserProvider implements UserProviderInterface {
      * @param string $saltField
      * the Entity fieldname of the password hash salt
      */
-    public function __construct(AbstractData $userData, AbstractData $userRoleData, $usernameField = 'username', $passwordField = 'password', $saltField = 'salt') {
+    public function __construct(AbstractData $userData, $userRoleIdentifier = 'roles', $usernameField = 'username', $passwordField = 'password', $saltField = 'salt') {
         $this->userData = $userData;
-        $this->userRoleData = $userRoleData;
+        $this->userRoleIdentifier = $userRoleIdentifier;
         $this->usernameField = $usernameField;
         $this->passwordField = $passwordField;
         $this->saltField = $saltField;
@@ -113,7 +135,7 @@ class UserProvider implements UserProviderInterface {
         }
 
         $user = $users[0];
-        $roles = $this->loadUserRoles($user->get('id'));
+        $roles = is_string($this->userRoleIdentifier) ? $this->loadUserRolesViaManyToMany($user) : $this->loadUserRolesViaData($user->get('id'));
 
         $userObj = new User($this->usernameField, $this->passwordField, $this->saltField, $user, $roles);
         return $userObj;

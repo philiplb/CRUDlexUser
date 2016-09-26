@@ -24,7 +24,7 @@ class PasswordResetTest extends \PHPUnit_Framework_TestCase {
     private $passwordReset;
 
     public function __construct() {
-        $crudServiceProvider = TestDBSetup::createServiceProvider();
+        $crudServiceProvider = TestDBSetup::createServiceProvider(false);
         $this->dataUser = $crudServiceProvider->getData('user');
         $this->dataPasswordReset = $crudServiceProvider->getData('passwordReset');
         $this->passwordReset = new PasswordReset($this->dataUser, $this->dataPasswordReset);
@@ -55,7 +55,7 @@ class PasswordResetTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testResetPassword() {
-        $app = TestDBSetup::createAppAndDB();
+        $app = TestDBSetup::createAppAndDB(false);
         $user = $this->dataUser->createEmpty();
         $user->set('username', 'user2');
         $user->set('password', 'asdasd');

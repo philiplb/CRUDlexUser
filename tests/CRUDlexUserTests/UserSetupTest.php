@@ -22,7 +22,7 @@ class UserSetupTest extends \PHPUnit_Framework_TestCase {
     protected $dataUser;
 
     protected function setUp() {
-        $crudServiceProvider = TestDBSetup::createServiceProvider();
+        $crudServiceProvider = TestDBSetup::createServiceProvider(false);
         $this->dataUser = $crudServiceProvider->getData('user');
     }
 

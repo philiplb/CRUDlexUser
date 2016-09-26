@@ -13,7 +13,7 @@ class TestDBSetup {
 
     private static $fileProcessor;
 
-    public static function createAppAndDB() {
+    public static function createAppAndDB($useManyToMany) {
         $app = new Application();
         $app->register(new DoctrineServiceProvider(), [
             'dbs.options' => [
@@ -60,21 +60,33 @@ class TestDBSetup {
             ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
         $app['db']->executeUpdate($sql);
 
-        $sql = 'CREATE TABLE `user_role` ('.
-            '  `id` int(11) NOT NULL AUTO_INCREMENT,'.
-            '  `version` int(11) NOT NULL,'.
-            '  `created_at` datetime NOT NULL,'.
-            '  `updated_at` datetime NOT NULL,'.
-            '  `deleted_at` datetime DEFAULT NULL,'.
-            '  `user` int(11) NOT NULL,'.
-            '  `role` int(11) NOT NULL,'.
-            '  PRIMARY KEY (`id`),'.
-            '  KEY `user` (`user`),'.
-            '  KEY `role` (`role`),'.
-            '  CONSTRAINT `userrole_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`id`),'.
-            '  CONSTRAINT `userrole_ibfk_2` FOREIGN KEY (`role`) REFERENCES `role` (`id`)'.
-            ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
-        $app['db']->executeUpdate($sql);
+        if ($useManyToMany) {
+            $sql = 'CREATE TABLE `user_role` ('.
+                '  `user` int(11) NOT NULL,'.
+                '  `role` int(11) NOT NULL,'.
+                '  KEY `user` (`user`),'.
+                '  KEY `role` (`role`),'.
+                '  CONSTRAINT `userrole_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`id`),'.
+                '  CONSTRAINT `userrole_ibfk_2` FOREIGN KEY (`role`) REFERENCES `role` (`id`)'.
+                ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+            $app['db']->executeUpdate($sql);
+        } else {
+            $sql = 'CREATE TABLE `user_role` ('.
+                '  `id` int(11) NOT NULL AUTO_INCREMENT,'.
+                '  `version` int(11) NOT NULL,'.
+                '  `created_at` datetime NOT NULL,'.
+                '  `updated_at` datetime NOT NULL,'.
+                '  `deleted_at` datetime DEFAULT NULL,'.
+                '  `user` int(11) NOT NULL,'.
+                '  `role` int(11) NOT NULL,'.
+                '  PRIMARY KEY (`id`),'.
+                '  KEY `user` (`user`),'.
+                '  KEY `role` (`role`),'.
+                '  CONSTRAINT `userrole_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`id`),'.
+                '  CONSTRAINT `userrole_ibfk_2` FOREIGN KEY (`role`) REFERENCES `role` (`id`)'.
+                ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+            $app['db']->executeUpdate($sql);
+        }
 
         $sql = 'CREATE TABLE `password_reset` ('.
             '  `id` int(11) NOT NULL AUTO_INCREMENT,'.
@@ -93,12 +105,12 @@ class TestDBSetup {
         return $app;
     }
 
-    public static function createServiceProvider() {
+    public static function createServiceProvider($useManyToMany) {
         self::$fileProcessor = new NullFileProcessor();
-        $app = self::createAppAndDB();
+        $app = self::createAppAndDB($useManyToMany);
         $crudServiceProvider = new ServiceProvider();
         $dataFactory = new MySQLDataFactory($app['db']);
-        $crudFile = __DIR__.'/../crud.yml';
+        $crudFile = __DIR__.'/../'.($useManyToMany ? 'crudManyToMany.yml' : 'crud.yml');
         $crudServiceProvider->init($dataFactory, $crudFile, self::$fileProcessor, true, $app);
 
         $userSetup = new UserSetup();

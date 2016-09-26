@@ -20,7 +20,7 @@ class UserTest extends \PHPUnit_Framework_TestCase {
     private $userEntity;
 
     public function __construct() {
-        $crudServiceProvider = TestDBSetup::createServiceProvider();
+        $crudServiceProvider = TestDBSetup::createServiceProvider(false);
         $dataUser = $crudServiceProvider->getData('user');
         $this->userEntity = $dataUser->createEmpty();
         $this->userEntity->set('username', 'username');

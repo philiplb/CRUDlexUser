@@ -26,7 +26,7 @@ class UserProviderTest extends \PHPUnit_Framework_TestCase {
     protected $dataUserRole;
 
     protected function setUp() {
-        $crudServiceProvider = TestDBSetup::createServiceProvider();
+        $crudServiceProvider = TestDBSetup::createServiceProvider(false);
         $this->dataUser = $crudServiceProvider->getData('user');
         $this->dataRole = $crudServiceProvider->getData('role');
         $this->dataUserRole = $crudServiceProvider->getData('userRole');
@@ -107,6 +107,31 @@ class UserProviderTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($read);
         $read = $userProvider->supportsClass(null);
         $this->assertFalse($read);
+    }
+
+    public function testRolesViaManyToMany() {
+        $crudServiceProvider = TestDBSetup::createServiceProvider(true);
+        $this->dataUser = $crudServiceProvider->getData('user');
+        $userProvider = new UserProvider($this->dataUser, 'user_role');
+
+        $role = $this->dataRole->createEmpty();
+        $role->set('role', 'ROLE_TEST');
+        $this->dataRole->create($role);
+
+        $expected = 'user1';
+        $user = $this->dataUser->createEmpty();
+        $user->set('username', $expected);
+        $user->set('password', 'asdasd');
+        $user->set('email', 'asd@asd.de');
+        $user->set('user_role', [['id' => $role->get('id')]]);
+        $this->dataUser->create($user);
+
+        $userRead = $userProvider->loadUserByUsername($expected);
+        $read = $userRead->getUsername();
+        $this->assertSame($read, $expected);
+        $read = $userRead->getRoles();
+        $expected = ['ROLE_USER', 'ROLE_TEST'];
+        $this->assertSame($read, $expected);
     }
 
 }
