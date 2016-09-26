@@ -58,4 +58,24 @@ class UserSetupTest extends \PHPUnit_Framework_TestCase {
         $read = $userSetup->getSalt(40);
         $this->assertTrue(strlen($read) === 40);
     }
+
+    public function testPossibleGenSalt() {
+        $password = 'asdasd';
+        $user = $this->dataUser->createEmpty();
+        $user->set('username', 'user1');
+        $user->set('password', $password);
+        $user->set('email', 'asd@asd.de');
+        $this->dataUser->create($user);
+        $userSetup = new UserSetup();
+
+        $salt = 'test';
+        $read = $userSetup->possibleGenSalt($salt, $user, 'salt');
+        $this->assertFalse($read);
+
+        $salt = null;
+        $read = $userSetup->possibleGenSalt($salt, $user, 'salt');
+        $this->assertTrue($read);
+        $read = $user->get('salt');
+        $this->assertNotEmpty($read);
+    }
 }
