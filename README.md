@@ -11,10 +11,33 @@ CRUDlexUser is a library offering an user provider for symfony/security.
 
 The CRUDlexUser API itself is documented here:
 
+* [0.11.0](http://philiplb.github.io/CRUDlexUser/docs/api/0.11.0/)
 * [0.10.0](http://philiplb.github.io/CRUDlexUser/docs/api/0.10.0/)
 * [0.9.10](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.10/)
 * [0.9.9](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.9/)
 * [0.9.8](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.8/)
+
+
+## Package
+
+CRUDlexUser uses [SemVer](http://semver.org/) for versioning. Currently, the API changes quickly due to be < 1.0.0, so take
+care about notes in the changelog when upgrading.
+
+### Stable
+
+```json
+"require": {
+    "philiplb/crudlexuser": "0.11.0"
+}
+```
+
+### Bleeding Edge
+
+```json
+"require": {
+    "philiplb/crudlexuser": "0.12.x-dev"
+}
+```
 
 ## Usage
 
