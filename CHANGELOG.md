@@ -1,8 +1,11 @@
 CRUDlexUser Changelog
 =====================
 
-## 0.11.0
+## 0.12.0
 Released: Upcoming
+
+## 0.11.0
+Released: 2016-09-26
 - Supporting a many-to-many relationship between user and roles
 
 ## 0.10.0

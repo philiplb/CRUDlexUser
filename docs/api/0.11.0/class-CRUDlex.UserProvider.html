@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class CRUDlex\UserProvider | CRUDlexUser API</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-CRUDlex.html">
+						CRUDlex					</a>
+
+						</li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-CRUDlex.PasswordReset.html">PasswordReset</a></li>
+				<li><a href="class-CRUDlex.User.html">User</a></li>
+				<li class="active"><a href="class-CRUDlex.UserProvider.html">UserProvider</a></li>
+				<li><a href="class-CRUDlex.UserSetup.html">UserSetup</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-CRUDlex.html" title="Summary of CRUDlex"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class UserProvider</h1>
+
+
+	<div class="description">
+	<p>The implementation of the UserProviderInterface to work with the CRUDlex API.</p>
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b><span>CRUDlex\UserProvider</span></b>			
+			 implements 
+<span>Symfony\Component\Security\Core\User\UserProviderInterface</span>
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-CRUDlex.html">CRUDlex</a><br>
+		
+
+			<b>Located at</b> UserProvider.php		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="loadUserRolesViaData" id="_loadUserRolesViaData">
+
+		<td class="attributes"><code>
+			 protected 
+
+			string[]
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_loadUserRolesViaData">#</a>
+		<code>loadUserRolesViaData( <span>mixed <var>$userId</var></span> )</code>
+
+		<div class="description short">
+			<p>Loads the roles of an user via an AbstractData instance.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Loads the roles of an user via an AbstractData instance.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$userId</var></dt>
+					<dd>the id of the user</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string[]<br>the roles of the user
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="loadUserRolesViaManyToMany" id="_loadUserRolesViaManyToMany">
+
+		<td class="attributes"><code>
+			 protected 
+
+			string[]
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_loadUserRolesViaManyToMany">#</a>
+		<code>loadUserRolesViaManyToMany( <span>Entity <var>$user</var></span> )</code>
+
+		<div class="description short">
+			<p>Loads the roles of an user via a many-to-many relationship</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Loads the roles of an user via a many-to-many relationship</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd>the id of the user</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string[]<br>the roles of the user
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code>__construct( <span>CRUDlex\AbstractData <var>$userData</var></span>, <span>string|CRUDlex\AbstractData <var>$userRoleIdentifier</var> = <span class="php-quote">'roles'</span></span>, <span>string <var>$usernameField</var> = <span class="php-quote">'username'</span></span>, <span>string <var>$passwordField</var> = <span class="php-quote">'password'</span></span>, <span>string <var>$saltField</var> = <span class="php-quote">'salt'</span></span> )</code>
+
+		<div class="description short">
+			<p>Constructor for data structures connecting users and roles via a many-to-many relationship on the user.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Constructor for data structures connecting users and roles via a many-to-many relationship on the user.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$userData</var></dt>
+					<dd>the AbstractData instance to grab the user data from</dd>
+					<dt><var>$userRoleIdentifier</var></dt>
+					<dd>the field of the many-to-many relationship to grab the user role data from or the AbstractData if its an own entity</dd>
+					<dt><var>$usernameField</var></dt>
+					<dd>the Entity fieldname of the username</dd>
+					<dt><var>$passwordField</var></dt>
+					<dd>the Entity fieldname of the password hash</dd>
+					<dt><var>$saltField</var></dt>
+					<dd>the Entity fieldname of the password hash salt</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="loadUserByUsername" id="_loadUserByUsername">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-CRUDlex.User.html">CRUDlex\User</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_loadUserByUsername">#</a>
+		<code>loadUserByUsername( <span>string <var>$username</var></span> )</code>
+
+		<div class="description short">
+			<p>Loads and returns an user by username.
+Throws an UsernameNotFoundException on not existing username.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Loads and returns an user by username.
+Throws an UsernameNotFoundException on not existing username.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$username</var></dt>
+					<dd>the username</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-CRUDlex.User.html">CRUDlex\User</a></code><br>the loaded user
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="refreshUser" id="_refreshUser">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-CRUDlex.User.html">CRUDlex\User</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_refreshUser">#</a>
+		<code>refreshUser( <span>Symfony\Component\Security\Core\User\UserInterface <var>$user</var></span> )</code>
+
+		<div class="description short">
+			<p>Reloads and returns the given user.
+Throws an UsernameNotFoundException if the user ceased to exist meanwhile.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Reloads and returns the given user.
+Throws an UsernameNotFoundException if the user ceased to exist meanwhile.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd>the user to reload</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-CRUDlex.User.html">CRUDlex\User</a></code><br>the reloaded user
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="supportsClass" id="_supportsClass">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_supportsClass">#</a>
+		<code>supportsClass( <span>string <var>$class</var></span> )</code>
+
+		<div class="description short">
+			<p>Tests whether the given user class is supported by this UserProvider.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Tests whether the given user class is supported by this UserProvider.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$class</var></dt>
+					<dd>the user class name to test</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean<br>true if the class is "CRUDlex\User"
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="usernameField" id="$usernameField">
+		<td class="attributes"><code>
+			protected  
+			
+		</code></td>
+
+		<td class="name">
+<var>$usernameField</var>
+			<div class="description short">
+				<p>The Entity fieldname of the username.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The Entity fieldname of the username.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$usernameField" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="passwordField" id="$passwordField">
+		<td class="attributes"><code>
+			protected  
+			
+		</code></td>
+
+		<td class="name">
+<var>$passwordField</var>
+			<div class="description short">
+				<p>The fieldname of the password (hash).</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The fieldname of the password (hash).</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$passwordField" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="saltField" id="$saltField">
+		<td class="attributes"><code>
+			protected  
+			
+		</code></td>
+
+		<td class="name">
+<var>$saltField</var>
+			<div class="description short">
+				<p>The fieldname of the password hash salt.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The fieldname of the password hash salt.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$saltField" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="userData" id="$userData">
+		<td class="attributes"><code>
+			protected  
+			
+		</code></td>
+
+		<td class="name">
+<var>$userData</var>
+			<div class="description short">
+				<p>Holds the AbstractData instance to grab the user data from.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Holds the AbstractData instance to grab the user data from.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$userData" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="userRoleData" id="$userRoleData">
+		<td class="attributes"><code>
+			protected  
+			
+		</code></td>
+
+		<td class="name">
+<var>$userRoleData</var>
+			<div class="description short">
+				<p>Holds the AbstractData instance or the field of the many-to-many relationship to grab the user role data from.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Holds the AbstractData instance or the field of the many-to-many relationship to grab the user role data from.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$userRoleData" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="userRoleIdentifier" id="$userRoleIdentifier">
+		<td class="attributes"><code>
+			protected  
+			
+		</code></td>
+
+		<td class="name">
+<var>$userRoleIdentifier</var>
+			<div class="description short">
+				<p>Holds the AbstractData instance or the field of the many-to-many relationship to grab the user role data from.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Holds the AbstractData instance or the field of the many-to-many relationship to grab the user role data from.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$userRoleIdentifier" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		CRUDlexUser API API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>
