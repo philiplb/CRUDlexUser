@@ -51,6 +51,17 @@ class UserSetupTest extends \PHPUnit_Framework_TestCase {
         $read = $readUser2->get('password');
         $this->assertNotSame($read, $hash);
 
+
+        $password = '';
+        $user = $this->dataUser->createEmpty();
+        $user->set('username', 'user2');
+        $user->set('password', $password);
+        $user->set('email', 'asd2@asd2.de');
+        $this->dataUser->create($user);
+        $readUser = $this->dataUser->get($user->get('id'));
+        $hash = $readUser->get('password');
+        $this->assertEmpty($hash);
+
     }
 
     public function testGetSalt() {
