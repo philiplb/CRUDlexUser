@@ -21,16 +21,14 @@ class PasswordResetTest extends \PHPUnit_Framework_TestCase {
 
     private $dataPasswordReset;
 
-    private $passwordReset;
-
     public function __construct() {
         $crudServiceProvider = TestDBSetup::createServiceProvider(false);
         $this->dataUser = $crudServiceProvider->getData('user');
         $this->dataPasswordReset = $crudServiceProvider->getData('passwordReset');
-        $this->passwordReset = new PasswordReset($this->dataUser, $this->dataPasswordReset);
     }
 
     public function testRequestPasswordReset() {
+        $passwordReset = new PasswordReset($this->dataUser, $this->dataPasswordReset);
 
         $user = $this->dataUser->createEmpty();
         $user->set('username', 'user1');
@@ -38,14 +36,14 @@ class PasswordResetTest extends \PHPUnit_Framework_TestCase {
         $user->set('email', 'asd@asd.de');
         $this->dataUser->create($user);
 
-        $read = $this->passwordReset->requestPasswordReset('email', 'dsa@dsa.de');
+        $read = $passwordReset->requestPasswordReset('email', 'dsa@dsa.de');
         $this->assertNull($read);
-        $read = $this->passwordReset->requestPasswordReset('email', '');
+        $read = $passwordReset->requestPasswordReset('email', '');
         $this->assertNull($read);
-        $read = $this->passwordReset->requestPasswordReset('email', null);
+        $read = $passwordReset->requestPasswordReset('email', null);
         $this->assertNull($read);
 
-        $token = $this->passwordReset->requestPasswordReset('email', 'asd@asd.de');
+        $token = $passwordReset->requestPasswordReset('email', 'asd@asd.de');
         $this->assertTrue(strlen($token) === 32);
 
         $read = $this->dataPasswordReset->countBy($this->dataPasswordReset->getDefinition()->getTable(), ['token' => $token], ['token' => '='], true);
@@ -55,6 +53,7 @@ class PasswordResetTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testResetPassword() {
+        $passwordReset = new PasswordReset($this->dataUser, $this->dataPasswordReset);
         $app = TestDBSetup::createAppAndDB(false);
         $user = $this->dataUser->createEmpty();
         $user->set('username', 'user2');
@@ -68,16 +67,16 @@ class PasswordResetTest extends \PHPUnit_Framework_TestCase {
         $encoder = new BCryptPasswordEncoder(13);
         $this->assertTrue($encoder->isPasswordValid($hash, 'asdasd', $salt));
 
-        $token = $this->passwordReset->requestPasswordReset('email', 'asd2@asd.de');
+        $token = $passwordReset->requestPasswordReset('email', 'asd2@asd.de');
 
-        $read = $this->passwordReset->resetPassword('asdasd', 'dsadsa');
+        $read = $passwordReset->resetPassword('asdasd', 'dsadsa');
         $this->assertFalse($read);
-        $read = $this->passwordReset->resetPassword('', 'dsadsa');
+        $read = $passwordReset->resetPassword('', 'dsadsa');
         $this->assertFalse($read);
-        $read = $this->passwordReset->resetPassword(null, 'dsadsa');
+        $read = $passwordReset->resetPassword(null, 'dsadsa');
         $this->assertFalse($read);
 
-        $read = $this->passwordReset->resetPassword($token, 'dsadsa');
+        $read = $passwordReset->resetPassword($token, 'dsadsa');
         $this->assertTrue($read);
 
         $updatedUser = $this->dataUser->get($user->get('id'));
@@ -85,20 +84,19 @@ class PasswordResetTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($encoder->isPasswordValid($newHash, 'dsadsa', $salt));
 
         // A token can be only used once
-        $read = $this->passwordReset->resetPassword($token, 'dsadsa');
+        $read = $passwordReset->resetPassword($token, 'dsadsa');
         $this->assertFalse($read);
 
         // A password reset must be used within 48h
-        $token = $this->passwordReset->requestPasswordReset('email', 'asd2@asd.de');
+        $token = $passwordReset->requestPasswordReset('email', 'asd2@asd.de');
         $passwordResets = $this->dataPasswordReset->listEntries(['token' => $token]);
         if (count($passwordResets) !== 1) {
             $this->fail();
         }
-        $passwordReset = $passwordResets[0];
         $oldCreatedAt = gmdate('Y-m-d H:i:s', time() - 3 * 24 * 60 * 60);
         $app['db']->executeUpdate('UPDATE password_reset SET created_at = ? WHERE token = ?', [$oldCreatedAt, $token]);
 
-        $read = $this->passwordReset->resetPassword($token, 'dsadsa');
+        $read = $passwordReset->resetPassword($token, 'dsadsa');
         $this->assertFalse($read);
 
     }
