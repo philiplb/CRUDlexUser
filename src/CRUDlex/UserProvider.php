@@ -85,8 +85,10 @@ class UserProvider implements UserProviderInterface {
      */
     protected function loadUserRolesViaManyToMany($user) {
         $roles = ['ROLE_USER'];
-        foreach ($user->get($this->userRoleIdentifier) as $role) {
-            $roles[] = $role['name'];
+        if (is_string($this->userRoleIdentifier)) {
+            foreach ($user->get($this->userRoleIdentifier) as $role) {
+                $roles[] = $role['name'];
+            }
         }
         return $roles;
     }
