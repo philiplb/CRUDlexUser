@@ -3,6 +3,10 @@ CRUDlexUser Changelog
 
 ## 0.12.0
 Released: Upcoming
+- Updated dependencies:
+	- "symfony/security": "~3.2"
+	- "symfony/browser-kit": "~3.2"
+	- "symfony/css-selector": "~3.2"
 
 ## 0.11.0
 Released: 2016-09-26
