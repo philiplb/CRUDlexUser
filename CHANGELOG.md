@@ -2,7 +2,8 @@ CRUDlexUser Changelog
 =====================
 
 ## 0.12.0
-Released: Upcoming
+Released: 2017-03-26
+- Relaxed a bit the required CRUDlex version
 - Updated dependencies:
 	- "symfony/security": "~3.2"
 	- "symfony/browser-kit": "~3.2"
