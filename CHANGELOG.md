@@ -1,6 +1,10 @@
 CRUDlexUser Changelog
 =====================
 
+## 0.13.0
+Released: Upcoming
+- Adjusted to CRUDlex 0.12.x-dev APIs
+
 ## 0.12.0
 Released: 2017-03-26
 - Relaxed a bit the required CRUDlex version

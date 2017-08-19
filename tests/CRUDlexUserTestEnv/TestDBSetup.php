@@ -1,8 +1,11 @@
 <?php
 namespace CRUDlexUserTestEnv;
 
+use League\Flysystem\Adapter\NullAdapter;
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
+
+use Eloquent\Phony\Phpunit\Phony;
 
 use CRUDlex\MySQLDataFactory;
 use CRUDlex\ServiceProvider;
@@ -11,7 +14,7 @@ use CRUDlexUserTestEnv\NullFileProcessor;
 
 class TestDBSetup {
 
-    private static $fileProcessor;
+    private static $filesystemHandle;
 
     public static function createAppAndDB($useManyToMany) {
         $app = new Application();
@@ -52,7 +55,7 @@ class TestDBSetup {
             '  `updated_at` datetime NOT NULL,'.
             '  `deleted_at` datetime DEFAULT NULL,'.
             '  `version` int(11) NOT NULL,'.
-            '  `password` varchar(255) NOT NULL,'.
+            '  `password` varchar(255) DEFAULT NULL,'.
             '  `salt` varchar(255) NOT NULL,'.
             '  `username` varchar(255) NOT NULL,'.
             '  `email` varchar(255) NOT NULL,'.
@@ -106,12 +109,20 @@ class TestDBSetup {
     }
 
     public static function createServiceProvider($useManyToMany) {
-        self::$fileProcessor = new NullFileProcessor();
+
+        static::$filesystemHandle = Phony::partialMock('\\League\\Flysystem\\Filesystem', [new NullAdapter()]);
+        static::$filesystemHandle->readStream->returns(null);
+        static::$filesystemHandle->getMimetype->returns('test');
+        static::$filesystemHandle->getSize->returns(42);
+
         $app = self::createAppAndDB($useManyToMany);
         $crudServiceProvider = new ServiceProvider();
-        $dataFactory = new MySQLDataFactory($app['db']);
-        $crudFile = __DIR__.'/../'.($useManyToMany ? 'crudManyToMany.yml' : 'crud.yml');
-        $crudServiceProvider->init($dataFactory, $crudFile, self::$fileProcessor, true, $app);
+
+        $app['crud.filesystem'] = static::$filesystemHandle->get();
+        $app['crud.datafactory'] = new MySQLDataFactory($app['db']);
+        $app['crud.file'] = __DIR__.'/../'.($useManyToMany ? 'crudManyToMany.yml' : 'crud.yml');
+        $crudServiceProvider->boot($app);
+        $crudServiceProvider->init(null, $app);
 
         $userSetup = new UserSetup();
         $userSetup->addEvents($crudServiceProvider->getData('user'));

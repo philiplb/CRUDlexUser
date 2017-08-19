@@ -165,12 +165,12 @@ class UserSetup {
             return true;
         };
 
-        $data->pushEvent('before', 'create', $saltGenFunction);
+        $data->getEvents()->push('before', 'create', $saltGenFunction);
 
         $pwHashFunction = $this->getPWHashFunction($data, $passwordField, $saltField);
 
-        $data->pushEvent('before', 'create', $pwHashFunction);
-        $data->pushEvent('before', 'update', $pwHashFunction);
+        $data->getEvents()->push('before', 'create', $pwHashFunction);
+        $data->getEvents()->push('before', 'update', $pwHashFunction);
 
     }
 

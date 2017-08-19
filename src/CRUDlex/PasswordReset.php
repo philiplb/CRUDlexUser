@@ -122,8 +122,8 @@ class PasswordReset {
         if ($passwordReset === null) {
             return false;
         }
-
-        $user = $this->userData->get($passwordReset->get('user'));
+        $user = $passwordReset->get('user');
+        $user = $this->userData->get($user['id']);
         $user->set('password', $newPassword);
         $this->userData->update($user);
 

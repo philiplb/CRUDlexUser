@@ -63,7 +63,6 @@ class UserProvider implements UserProviderInterface {
      */
     protected function loadUserRolesViaData($userId) {
         $crudRoles = $this->userRoleIdentifier->listEntries(['user' => $userId], ['user' => '=']);
-        $this->userRoleIdentifier->fetchReferences($crudRoles);
         $roles = ['ROLE_USER'];
         if ($crudRoles !== null) {
             foreach ($crudRoles as $crudRole) {
