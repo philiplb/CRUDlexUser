@@ -1,5 +1,5 @@
 title: CRUDlexUser API
-destination: docs/api/0.11.0
+destination: docs/api/0.13.0
 source:
 	- src/CRUDlex
 noSourceCode: true
