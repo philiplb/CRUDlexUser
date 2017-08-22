@@ -3,7 +3,12 @@ CRUDlexUser Changelog
 
 ## 0.13.0
 Released: Upcoming
-- Adjusted to CRUDlex 0.12.x-dev APIs
+- Adjusted to CRUDlex 0.12.0 APIs
+- Updated dependencies:
+	- "symfony/security": "~3.3"
+	- "symfony/browser-kit": "~3.3"
+	- "symfony/css-selector": "~3.3"
+    - "eloquent/phony": "~1.0"
 
 ## 0.12.0
 Released: 2017-03-26
