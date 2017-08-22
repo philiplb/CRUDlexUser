@@ -1,8 +1,11 @@
 CRUDlexUser Changelog
 =====================
 
-## 0.13.0
+## 0.14.0
 Released: Upcoming
+
+## 0.13.0
+Released: 2017-08-22
 - Adjusted to CRUDlex 0.12.0 APIs
 - Updated dependencies:
 	- "symfony/security": "~3.3"

@@ -11,6 +11,8 @@ CRUDlexUser is a library offering an user provider for symfony/security.
 
 The CRUDlexUser API itself is documented here:
 
+* [0.13.0](http://philiplb.github.io/CRUDlexUser/docs/api/0.13.0/)
+* [0.12.0](http://philiplb.github.io/CRUDlexUser/docs/api/0.12.0/)
 * [0.11.0](http://philiplb.github.io/CRUDlexUser/docs/api/0.11.0/)
 * [0.10.0](http://philiplb.github.io/CRUDlexUser/docs/api/0.10.0/)
 * [0.9.10](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.10/)
@@ -27,7 +29,7 @@ care about notes in the changelog when upgrading.
 
 ```json
 "require": {
-    "philiplb/crudlexuser": "0.11.0"
+    "philiplb/crudlexuser": "0.13.0"
 }
 ```
 
@@ -35,7 +37,7 @@ care about notes in the changelog when upgrading.
 
 ```json
 "require": {
-    "philiplb/crudlexuser": "0.12.x-dev"
+    "philiplb/crudlexuser": "0.14.x-dev"
 }
 ```
 
