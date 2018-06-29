@@ -21,7 +21,7 @@ class UserTest extends TestCase
 
     private $userEntity;
 
-    public function __construct()
+    protected function setUp()
     {
         $crudServiceProvider = TestDBSetup::createServiceProvider(false);
         $dataUser = $crudServiceProvider->getData('user');
@@ -71,6 +71,7 @@ class UserTest extends TestCase
         $roles = ['ROLE_TEST'];
         $user = new User('username', 'password', 'salt', $this->userEntity, $roles);
         $user->eraseCredentials();
+        $this->assertTrue(true); // if we came this far, everything is ok
     }
 
     public function testGetUserData()
