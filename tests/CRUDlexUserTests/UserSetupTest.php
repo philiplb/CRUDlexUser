@@ -18,7 +18,8 @@ use CRUDlex\UserSetup;
 use CRUDlexUserTestEnv\TestDBSetup;
 use PHPUnit\Framework\TestCase;
 
-class UserSetupTest extends TestCase {
+class UserSetupTest extends TestCase
+{
 
     protected $dataUser;
 
@@ -27,7 +28,8 @@ class UserSetupTest extends TestCase {
         $this->dataUser = $crudServiceProvider->getData('user');
     }
 
-    public function testAddEvents() {
+    public function testAddEvents()
+    {
         $password = 'asdasd';
         $user = $this->dataUser->createEmpty();
         $user->set('username', 'user1');
@@ -65,13 +67,15 @@ class UserSetupTest extends TestCase {
 
     }
 
-    public function testGetSalt() {
+    public function testGetSalt()
+    {
         $userSetup = new UserSetup();
         $read = $userSetup->getSalt(40);
         $this->assertTrue(strlen($read) === 40);
     }
 
-    public function testPossibleGenSalt() {
+    public function testPossibleGenSalt()
+    {
         $password = 'asdasd';
         $user = $this->dataUser->createEmpty();
         $user->set('username', 'user1');

@@ -18,7 +18,8 @@ use CRUDlex\UserProvider;
 
 use CRUDlexUserTestEnv\TestDBSetup;
 
-class UserProviderTest extends TestCase {
+class UserProviderTest extends TestCase
+{
 
     protected $dataUser;
 
@@ -26,14 +27,16 @@ class UserProviderTest extends TestCase {
 
     protected $dataUserRole;
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $crudServiceProvider = TestDBSetup::createServiceProvider(false);
         $this->dataUser = $crudServiceProvider->getData('user');
         $this->dataRole = $crudServiceProvider->getData('role');
         $this->dataUserRole = $crudServiceProvider->getData('userRole');
     }
 
-    public function testLoadUserByUsername() {
+    public function testLoadUserByUsername()
+    {
 
         $expected = 'user1';
         $user = $this->dataUser->createEmpty();
@@ -68,7 +71,8 @@ class UserProviderTest extends TestCase {
         }
     }
 
-    public function testRefreshUser() {
+    public function testRefreshUser()
+    {
 
         $expected = 'user1';
         $user = $this->dataUser->createEmpty();
@@ -100,7 +104,8 @@ class UserProviderTest extends TestCase {
 
     }
 
-    public function testSupportsClass() {
+    public function testSupportsClass()
+    {
         $userProvider = new UserProvider($this->dataUser, $this->dataUserRole);
         $read = $userProvider->supportsClass('CRUDlex\User');
         $this->assertTrue($read);
@@ -110,7 +115,8 @@ class UserProviderTest extends TestCase {
         $this->assertFalse($read);
     }
 
-    public function testRolesViaManyToMany() {
+    public function testRolesViaManyToMany()
+    {
         $crudServiceProvider = TestDBSetup::createServiceProvider(true);
         $this->dataUser = $crudServiceProvider->getData('user');
         $userProvider = new UserProvider($this->dataUser, 'user_role');

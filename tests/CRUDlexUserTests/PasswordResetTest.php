@@ -16,7 +16,8 @@ use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 use CRUDlex\PasswordReset;
 use CRUDlexUserTestEnv\TestDBSetup;
 
-class PasswordResetTest extends TestCase {
+class PasswordResetTest extends TestCase
+{
 
     private $dataUser;
 
@@ -29,7 +30,8 @@ class PasswordResetTest extends TestCase {
         $this->dataPasswordReset = $crudServiceProvider->getData('passwordReset');
     }
 
-        public function testRequestPasswordReset() {
+        public function testRequestPasswordReset()
+        {
             $passwordReset = new PasswordReset($this->dataUser, $this->dataPasswordReset);
 
             $user = $this->dataUser->createEmpty();
@@ -54,7 +56,8 @@ class PasswordResetTest extends TestCase {
 
     }
 
-    public function testResetPassword() {
+    public function testResetPassword()
+    {
         $passwordReset = new PasswordReset($this->dataUser, $this->dataPasswordReset);
         $app = TestDBSetup::createAppAndDB(false);
         $user = $this->dataUser->createEmpty();
@@ -71,7 +74,8 @@ class PasswordResetTest extends TestCase {
 
         $token = $passwordReset->requestPasswordReset('email', 'asd2@asd.de');
 
-        $read = $passwordReset->resetPassword('asdasd', 'dsadsa');
+        $read = $passwordReset->resetPassword('
+        sdasd', 'dsadsa');
         $this->assertFalse($read);
         $read = $passwordReset->resetPassword('', 'dsadsa');
         $this->assertFalse($read);

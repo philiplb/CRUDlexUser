@@ -17,7 +17,8 @@ use CRUDlex\Entity;
 /**
  * The UserInterface implementation for the UserProvider.
  */
-class User implements UserInterface {
+class User implements UserInterface
+{
 
     /**
      * Holds the actual user data.
@@ -62,7 +63,8 @@ class User implements UserInterface {
      * @param array $roles
      * the roles
      */
-    public function __construct($usernameField, $passwordField, $saltField, Entity $userEntity, array $roles) {
+    public function __construct($usernameField, $passwordField, $saltField, Entity $userEntity, array $roles)
+    {
         $this->usernameField = $usernameField;
         $this->passwordField = $passwordField;
         $this->saltField = $saltField;
@@ -80,7 +82,8 @@ class User implements UserInterface {
      * @return array
      * the roles
      */
-    public function getRoles() {
+    public function getRoles()
+    {
         return $this->roles;
     }
 
@@ -90,7 +93,8 @@ class User implements UserInterface {
      * @return string
      * the password
      */
-    public function getPassword() {
+    public function getPassword()
+    {
         return $this->userData[$this->passwordField];
     }
 
@@ -100,7 +104,8 @@ class User implements UserInterface {
      * @return string
      * the salt
      */
-    public function getSalt() {
+    public function getSalt()
+    {
         return $this->userData[$this->saltField];
     }
 
@@ -110,7 +115,8 @@ class User implements UserInterface {
      * @return string
      * the username
      */
-    public function getUsername() {
+    public function getUsername()
+    {
         return $this->userData[$this->usernameField];
     }
 
@@ -118,7 +124,8 @@ class User implements UserInterface {
      * Should erase some crucial data if needed. But nothing to do here in this
      * implementation.
      */
-    public function eraseCredentials() {
+    public function eraseCredentials()
+    {
     }
 
     /**
@@ -127,7 +134,8 @@ class User implements UserInterface {
      * @return array
      * the user data
      */
-    public function getUserData() {
+    public function getUserData()
+    {
         return $this->userData;
     }
 

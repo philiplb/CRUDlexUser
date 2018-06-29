@@ -16,7 +16,8 @@ class TestDBSetup {
 
     private static $filesystemHandle;
 
-    public static function createAppAndDB($useManyToMany) {
+    public static function createAppAndDB($useManyToMany)
+    {
         $app = new Application();
         $app->register(new DoctrineServiceProvider(), [
             'dbs.options' => [
@@ -108,7 +109,8 @@ class TestDBSetup {
         return $app;
     }
 
-    public static function createServiceProvider($useManyToMany) {
+    public static function createServiceProvider($useManyToMany)
+    {
 
         static::$filesystemHandle = Phony::partialMock('\\League\\Flysystem\\Filesystem', [new NullAdapter()]);
         static::$filesystemHandle->readStream->returns(null);
@@ -130,7 +132,8 @@ class TestDBSetup {
         return $crudServiceProvider;
     }
 
-    public static function getFileProcessor() {
+    public static function getFileProcessor()
+    {
         return self::$fileProcessor;
     }
 

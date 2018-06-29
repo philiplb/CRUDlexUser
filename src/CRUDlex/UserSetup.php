@@ -20,7 +20,8 @@ use CRUDlex\Entity;
  * This class setups CRUDlex with some events so the passwords get salted and
  * hashed properly.
  */
-class UserSetup {
+class UserSetup
+{
 
     /**
      * The encoder to use.
@@ -39,7 +40,8 @@ class UserSetup {
      * @param string $saltField
      * the Entity fieldname of the password hash salt
      */
-    protected function getPWHashFunction(AbstractData $data, $passwordField, $saltField) {
+    protected function getPWHashFunction(AbstractData $data, $passwordField, $saltField)
+    {
         $that = $this;
         return function(Entity $entity) use ($data, $passwordField, $saltField, $that) {
             $password = $entity->get($passwordField);
@@ -68,7 +70,8 @@ class UserSetup {
      * @param PasswordEncoderInterface $encoder
      * the encoder to use, defaults to BCryptPasswordEncoder if null is given
      */
-    public function __construct(PasswordEncoderInterface $encoder = null) {
+    public function __construct(PasswordEncoderInterface $encoder = null)
+    {
         $this->encoder = $encoder;
         if ($this->encoder === null) {
             $this->encoder = new BCryptPasswordEncoder(13);
@@ -88,7 +91,8 @@ class UserSetup {
      * @return boolean
      * true if a new salt was generated
      */
-    public function possibleGenSalt(&$salt, Entity $entity, $saltField) {
+    public function possibleGenSalt(&$salt, Entity $entity, $saltField)
+    {
         if (!$salt) {
             $salt = $this->getSalt(40);
             $entity->set($saltField, $salt);
@@ -114,7 +118,8 @@ class UserSetup {
      * @return boolean
      * true if the entity needs a new hash
      */
-    public function doGenerateHash(AbstractData $data, Entity $entity, $passwordField, $password, $newSalt) {
+    public function doGenerateHash(AbstractData $data, Entity $entity, $passwordField, $password, $newSalt)
+    {
         $doGenerateHash = true;
         $id = $entity->get('id');
         if ($id !== null) {
@@ -133,7 +138,8 @@ class UserSetup {
      * @return string
      * a random salt of the given length
      */
-    public function getSalt($len) {
+    public function getSalt($len)
+    {
         $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`~!@#$%^&*()-=_+';
         $l = strlen($chars) - 1;
         $str = '';
@@ -156,7 +162,8 @@ class UserSetup {
      * @param string $saltField
      * the Entity fieldname of the password hash salt
      */
-    public function addEvents(AbstractData $data, $passwordField = 'password', $saltField = 'salt') {
+    public function addEvents(AbstractData $data, $passwordField = 'password', $saltField = 'salt')
+    {
 
         $that = $this;
         $saltGenFunction = function(Entity $entity) use ($saltField, $that) {

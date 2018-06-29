@@ -20,7 +20,8 @@ use CRUDlex\User;
 /**
  * The implementation of the UserProviderInterface to work with the CRUDlex API.
  */
-class UserProvider implements UserProviderInterface {
+class UserProvider implements UserProviderInterface
+{
 
     /**
      * The Entity fieldname of the username.
@@ -61,7 +62,8 @@ class UserProvider implements UserProviderInterface {
      * @return string[]
      * the roles of the user
      */
-    protected function loadUserRolesViaData($userId) {
+    protected function loadUserRolesViaData($userId)
+    {
         $crudRoles = $this->userRoleIdentifier->listEntries(['user' => $userId], ['user' => '=']);
         $roles = ['ROLE_USER'];
         if ($crudRoles !== null) {
@@ -82,7 +84,8 @@ class UserProvider implements UserProviderInterface {
      * @return string[]
      * the roles of the user
      */
-    protected function loadUserRolesViaManyToMany($user) {
+    protected function loadUserRolesViaManyToMany($user)
+    {
         $roles = ['ROLE_USER'];
         if (is_string($this->userRoleIdentifier)) {
             foreach ($user->get($this->userRoleIdentifier) as $role) {
@@ -110,7 +113,8 @@ class UserProvider implements UserProviderInterface {
      * @param string $saltField
      * the Entity fieldname of the password hash salt
      */
-    public function __construct(AbstractData $userData, $userRoleIdentifier = 'roles', $usernameField = 'username', $passwordField = 'password', $saltField = 'salt') {
+    public function __construct(AbstractData $userData, $userRoleIdentifier = 'roles', $usernameField = 'username', $passwordField = 'password', $saltField = 'salt')
+    {
         $this->userData = $userData;
         $this->userRoleIdentifier = $userRoleIdentifier;
         $this->usernameField = $usernameField;
@@ -128,7 +132,8 @@ class UserProvider implements UserProviderInterface {
      * @return User
      * the loaded user
      */
-    public function loadUserByUsername($username) {
+    public function loadUserByUsername($username)
+    {
 
         $users = $this->userData->listEntries([$this->usernameField => $username], [$this->usernameField => '='], 0, 1);
         if (count($users) === 0) {
@@ -152,7 +157,8 @@ class UserProvider implements UserProviderInterface {
      * @return User
      * the reloaded user
      */
-    public function refreshUser(UserInterface $user) {
+    public function refreshUser(UserInterface $user)
+    {
         $refreshedUser = $this->loadUserByUsername($user->getUsername());
         return $refreshedUser;
     }
@@ -166,7 +172,8 @@ class UserProvider implements UserProviderInterface {
      * @return boolean
      * true if the class is "CRUDlex\User"
      */
-    public function supportsClass($class) {
+    public function supportsClass($class)
+    {
         return $class === 'CRUDlex\User';
     }
 

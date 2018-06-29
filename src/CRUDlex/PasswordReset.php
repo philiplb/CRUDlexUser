@@ -16,7 +16,8 @@ use CRUDlex\UserSetup;
 /**
  * This class offers some features to implement a password reset flow.
  */
-class PasswordReset {
+class PasswordReset
+{
 
     /**
      * Holds the user Data instance.
@@ -37,7 +38,8 @@ class PasswordReset {
      * @return null|CRUDlex\Entity
      * the password reset request
      */
-    protected function getValidPasswordReset($token) {
+    protected function getValidPasswordReset($token)
+    {
         $passwordResets = $this->passwordResetData->listEntries(['token' => $token]);
         if (count($passwordResets) !== 1) {
             return null;
@@ -60,7 +62,8 @@ class PasswordReset {
      * @param CRUDlex\Data $passwordResetData
      * the password reset data instance
      */
-    public function __construct($userData, $passwordResetData) {
+    public function __construct($userData, $passwordResetData)
+    {
         $this->userData = $userData;
         $this->passwordResetData = $passwordResetData;
     }
@@ -79,7 +82,8 @@ class PasswordReset {
      * identified uniquly via the given parameters: either zero or more than one
      * users were found
      */
-    public function requestPasswordReset($identifyingField, $identifyingValue) {
+    public function requestPasswordReset($identifyingField, $identifyingValue)
+    {
 
         $users = $this->userData->listEntries([$identifyingField => $identifyingValue]);
         if (count($users) !== 1) {
@@ -117,7 +121,8 @@ class PasswordReset {
      * - the password request for this token is older than 48h
      * - the password request for this token has already been used
      */
-    public function resetPassword($token, $newPassword) {
+    public function resetPassword($token, $newPassword)
+    {
         $passwordReset = $this->getValidPasswordReset($token);
         if ($passwordReset === null) {
             return false;
