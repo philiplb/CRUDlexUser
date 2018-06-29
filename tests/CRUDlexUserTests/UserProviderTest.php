@@ -11,13 +11,14 @@
 
 namespace CRUDlexUserTestEnv;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 use CRUDlex\UserProvider;
 
 use CRUDlexUserTestEnv\TestDBSetup;
 
-class UserProviderTest extends \PHPUnit_Framework_TestCase {
+class UserProviderTest extends TestCase {
 
     protected $dataUser;
 

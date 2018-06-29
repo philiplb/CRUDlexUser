@@ -3,6 +3,14 @@ CRUDlexUser Changelog
 
 ## 0.14.0
 Released: Upcoming
+- Attention: Updated the required PHP version to >=7.1
+- Updated dependencies:
+    - "symfony/security": "~4.1"
+    - "phpunit/phpunit": "~7.2"
+    - "symfony/browser-kit": "~4.1"
+    - "symfony/css-selector": "~4.1"
+    - "eloquent/phony": "~3.0"
+    - "eloquent/phony-phpunit": "4.0"
 
 ## 0.13.0
 Released: 2017-08-22

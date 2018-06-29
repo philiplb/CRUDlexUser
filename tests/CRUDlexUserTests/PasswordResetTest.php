@@ -11,44 +11,46 @@
 
 namespace CRUDlexUserTests;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 use CRUDlex\PasswordReset;
 use CRUDlexUserTestEnv\TestDBSetup;
 
-class PasswordResetTest extends \PHPUnit_Framework_TestCase {
+class PasswordResetTest extends TestCase {
 
     private $dataUser;
 
     private $dataPasswordReset;
 
-    public function __construct() {
+    protected function setUp()
+    {
         $crudServiceProvider = TestDBSetup::createServiceProvider(false);
         $this->dataUser = $crudServiceProvider->getData('user');
         $this->dataPasswordReset = $crudServiceProvider->getData('passwordReset');
     }
 
-    public function testRequestPasswordReset() {
-        $passwordReset = new PasswordReset($this->dataUser, $this->dataPasswordReset);
+        public function testRequestPasswordReset() {
+            $passwordReset = new PasswordReset($this->dataUser, $this->dataPasswordReset);
 
-        $user = $this->dataUser->createEmpty();
-        $user->set('username', 'user1');
-        $user->set('password', 'asdasd');
-        $user->set('email', 'asd@asd.de');
-        $this->dataUser->create($user);
+            $user = $this->dataUser->createEmpty();
+            $user->set('username', 'user1');
+            $user->set('password', 'asdasd');
+            $user->set('email', 'asd@asd.de');
+            $this->dataUser->create($user);
 
-        $read = $passwordReset->requestPasswordReset('email', 'dsa@dsa.de');
-        $this->assertNull($read);
-        $read = $passwordReset->requestPasswordReset('email', '');
-        $this->assertNull($read);
-        $read = $passwordReset->requestPasswordReset('email', null);
-        $this->assertNull($read);
+            $read = $passwordReset->requestPasswordReset('email', 'dsa@dsa.de');
+            $this->assertNull($read);
+            $read = $passwordReset->requestPasswordReset('email', '');
+            $this->assertNull($read);
+            $read = $passwordReset->requestPasswordReset('email', null);
+            $this->assertNull($read);
 
-        $token = $passwordReset->requestPasswordReset('email', 'asd@asd.de');
-        $this->assertTrue(strlen($token) === 32);
+            $token = $passwordReset->requestPasswordReset('email', 'asd@asd.de');
+            $this->assertTrue(strlen($token) === 32);
 
-        $read = $this->dataPasswordReset->countBy($this->dataPasswordReset->getDefinition()->getTable(), ['token' => $token], ['token' => '='], true);
-        $expected = 1;
-        $this->assertSame($read, $expected);
+            $read = $this->dataPasswordReset->countBy($this->dataPasswordReset->getDefinition()->getTable(), ['token' => $token], ['token' => '='], true);
+            $expected = 1;
+            $this->assertSame($read, $expected);
 
     }
 

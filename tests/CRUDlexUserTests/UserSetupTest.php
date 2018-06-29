@@ -16,8 +16,9 @@ use CRUDlex\UserProvider;
 use CRUDlex\UserSetup;
 
 use CRUDlexUserTestEnv\TestDBSetup;
+use PHPUnit\Framework\TestCase;
 
-class UserSetupTest extends \PHPUnit_Framework_TestCase {
+class UserSetupTest extends TestCase {
 
     protected $dataUser;
 
