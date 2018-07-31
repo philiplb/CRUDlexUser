@@ -11,6 +11,7 @@ CRUDlexUser is a library offering an user provider for symfony/security.
 
 The CRUDlexUser API itself is documented here:
 
+* [0.14.0](http://philiplb.github.io/CRUDlexUser/docs/api/0.14.0/) (upcoming)
 * [0.13.0](http://philiplb.github.io/CRUDlexUser/docs/api/0.13.0/)
 * [0.12.0](http://philiplb.github.io/CRUDlexUser/docs/api/0.12.0/)
 * [0.11.0](http://philiplb.github.io/CRUDlexUser/docs/api/0.11.0/)
@@ -18,6 +19,12 @@ The CRUDlexUser API itself is documented here:
 * [0.9.10](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.10/)
 * [0.9.9](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.9/)
 * [0.9.8](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.8/)
+
+Generated via (assuming APIGen is globally installed like `composer global require ...`):
+
+```bash
+~/.composer/vendor/bin/apigen generate
+```
 
 
 ## Package
