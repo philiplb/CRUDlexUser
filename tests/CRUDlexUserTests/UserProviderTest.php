@@ -21,6 +21,8 @@ use CRUDlexUserTestEnv\TestDBSetup;
 class UserProviderTest extends TestCase
 {
 
+    protected $service;
+
     protected $dataUser;
 
     protected $dataRole;
@@ -29,10 +31,10 @@ class UserProviderTest extends TestCase
 
     protected function setUp()
     {
-        $crudServiceProvider = TestDBSetup::createServiceProvider(false);
-        $this->dataUser = $crudServiceProvider->getData('user');
-        $this->dataRole = $crudServiceProvider->getData('role');
-        $this->dataUserRole = $crudServiceProvider->getData('userRole');
+        $this->service = TestDBSetup::createService(false);
+        $this->dataUser = $this->service->getData('user');
+        $this->dataRole = $this->service->getData('role');
+        $this->dataUserRole = $this->service->getData('userRole');
     }
 
     public function testLoadUserByUsername()
@@ -54,7 +56,7 @@ class UserProviderTest extends TestCase
         $userRole->set('role', $role->get('id'));
         $this->dataUserRole->create($userRole);
 
-        $userProvider = new UserProvider($this->dataUser, $this->dataUserRole);
+        $userProvider = new UserProvider($this->service, 'user', $this->dataUserRole);
 
         $userRead = $userProvider->loadUserByUsername($expected);
         $read = $userRead->getUsername();
@@ -64,7 +66,7 @@ class UserProviderTest extends TestCase
         $this->assertSame($read, $expected);
 
         try {
-            $read = $userProvider->loadUserByUsername('foo');
+            $userProvider->loadUserByUsername('foo');
             $this->fail();
         } catch (UsernameNotFoundException $e) {
             // Expected.
@@ -81,7 +83,7 @@ class UserProviderTest extends TestCase
         $user->set('email', 'asd@asd.de');
         $this->dataUser->create($user);
 
-        $userProvider = new UserProvider($this->dataUser, $this->dataUserRole);
+        $userProvider = new UserProvider($this->service, 'user', $this->dataUserRole);
         $userRead = $userProvider->loadUserByUsername($expected);
 
         $expected = ['ROLE_USER'];
@@ -106,7 +108,7 @@ class UserProviderTest extends TestCase
 
     public function testSupportsClass()
     {
-        $userProvider = new UserProvider($this->dataUser, $this->dataUserRole);
+        $userProvider = new UserProvider($this->service, 'user', $this->dataUserRole);
         $read = $userProvider->supportsClass('CRUDlex\User');
         $this->assertTrue($read);
         $read = $userProvider->supportsClass('foo');
@@ -117,9 +119,9 @@ class UserProviderTest extends TestCase
 
     public function testRolesViaManyToMany()
     {
-        $crudServiceProvider = TestDBSetup::createServiceProvider(true);
-        $this->dataUser = $crudServiceProvider->getData('user');
-        $userProvider = new UserProvider($this->dataUser, 'user_role');
+        $crudService = TestDBSetup::createService(true);
+        $this->dataUser = $crudService->getData('user');
+        $userProvider = new UserProvider($crudService, 'user', 'user_role');
 
         $role = $this->dataRole->createEmpty();
         $role->set('role', 'ROLE_TEST');
@@ -132,7 +134,6 @@ class UserProviderTest extends TestCase
         $user->set('email', 'asd@asd.de');
         $user->set('user_role', [['id' => $role->get('id')]]);
         $this->dataUser->create($user);
-
         $userRead = $userProvider->loadUserByUsername($expected);
         $read = $userRead->getUsername();
         $this->assertSame($read, $expected);

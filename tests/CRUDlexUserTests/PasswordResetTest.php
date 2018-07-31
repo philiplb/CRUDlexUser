@@ -25,9 +25,9 @@ class PasswordResetTest extends TestCase
 
     protected function setUp()
     {
-        $crudServiceProvider = TestDBSetup::createServiceProvider(false);
-        $this->dataUser = $crudServiceProvider->getData('user');
-        $this->dataPasswordReset = $crudServiceProvider->getData('passwordReset');
+        $crudService = TestDBSetup::createService(false);
+        $this->dataUser = $crudService->getData('user');
+        $this->dataPasswordReset = $crudService->getData('passwordReset');
     }
 
         public function testRequestPasswordReset()
@@ -59,7 +59,9 @@ class PasswordResetTest extends TestCase
     public function testResetPassword()
     {
         $passwordReset = new PasswordReset($this->dataUser, $this->dataPasswordReset);
-        $app = TestDBSetup::createAppAndDB(false);
+        $config = new \Doctrine\DBAL\Configuration();
+        $db = \Doctrine\DBAL\DriverManager::getConnection(TestDBSetup::getDBConfig(), $config);
+        TestDBSetup::createDB($db, false);
         $user = $this->dataUser->createEmpty();
         $user->set('username', 'user2');
         $user->set('password', 'asdasd');
@@ -100,7 +102,7 @@ class PasswordResetTest extends TestCase
             $this->fail();
         }
         $oldCreatedAt = gmdate('Y-m-d H:i:s', time() - 3 * 24 * 60 * 60);
-        $app['db']->executeUpdate('UPDATE password_reset SET created_at = ? WHERE token = ?', [$oldCreatedAt, $token]);
+        $db->executeUpdate('UPDATE password_reset SET created_at = ? WHERE token = ?', [$oldCreatedAt, $token]);
 
         $read = $passwordReset->resetPassword($token, 'dsadsa');
         $this->assertFalse($read);

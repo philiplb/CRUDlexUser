@@ -4,6 +4,7 @@ CRUDlexUser Changelog
 ## 0.14.0
 Released: Upcoming
 - Attention: Updated the required PHP version to >=7.1
+- Attention: Changed the constructor of the UserProvider to not take directly an AbstractData instance anymore
 - Updated dependencies:
     - "symfony/security": "~4.1"
     - "phpunit/phpunit": "~7.2"

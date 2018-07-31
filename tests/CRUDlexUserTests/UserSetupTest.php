@@ -25,7 +25,7 @@ class UserSetupTest extends TestCase
 
     protected function setUp()
     {
-        $crudServiceProvider = TestDBSetup::createServiceProvider(false);
+        $crudServiceProvider = TestDBSetup::createService(false);
         $this->dataUser = $crudServiceProvider->getData('user');
     }
 

@@ -98,10 +98,13 @@ class UserProvider implements UserProviderInterface
     /**
      * Constructor for data structures connecting users and roles via a many-to-many relationship on the user.
      *
-     * @param AbstractData $userData
-     * the AbstractData instance to grab the user data from
+     * @param Service $service
+     * the Service instance to take the AbstractData of the users from
      *
-     * @param string|AbstractData $userRoleIdentifier
+     * @param string $userIdentifier
+     * the identifier to of the user AbstractData
+     *
+     * @param string $userRoleIdentifier
      * the field of the many-to-many relationship to grab the user role data from or the AbstractData if its an own entity
      *
      * @param string $usernameField
@@ -113,9 +116,9 @@ class UserProvider implements UserProviderInterface
      * @param string $saltField
      * the Entity fieldname of the password hash salt
      */
-    public function __construct(AbstractData $userData, $userRoleIdentifier = 'roles', $usernameField = 'username', $passwordField = 'password', $saltField = 'salt')
+    public function __construct(Service $service, $userIdentifier = 'user', $userRoleIdentifier = 'roles', $usernameField = 'username', $passwordField = 'password', $saltField = 'salt')
     {
-        $this->userData = $userData;
+        $this->userData = $service->getData($userIdentifier);
         $this->userRoleIdentifier = $userRoleIdentifier;
         $this->usernameField = $usernameField;
         $this->passwordField = $passwordField;
