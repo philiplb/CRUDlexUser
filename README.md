@@ -20,7 +20,11 @@ The CRUDlexUser API itself is documented here:
 * [0.9.9](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.9/)
 * [0.9.8](http://philiplb.github.io/CRUDlexUser/docs/api/0.9.8/)
 
-Generated via (assuming APIGen is globally installed like `composer global require ...`):
+Upcoming bleeding edge:
+
+* [Upcoming](http://philiplb.github.io/CRUDlexUser/docs/api/upcoming/)
+
+Generated via (assuming APIGen is globally installed like `composer global require ...` and the PHP version is at maximum 7.1):
 
 ```bash
 ~/.composer/vendor/bin/apigen generate
@@ -36,7 +40,7 @@ care about notes in the changelog when upgrading.
 
 ```json
 "require": {
-    "philiplb/crudlexuser": "0.13.0"
+    "philiplb/crudlexuser": "0.14.0"
 }
 ```
 
@@ -44,7 +48,7 @@ care about notes in the changelog when upgrading.
 
 ```json
 "require": {
-    "philiplb/crudlexuser": "0.14.x-dev"
+    "philiplb/crudlexuser": "0.15.x-dev"
 }
 ```
 

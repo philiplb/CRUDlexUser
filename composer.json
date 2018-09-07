@@ -11,15 +11,9 @@
             "email": "philip@philiplb.de"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/ptlis/MetaYaml"
-        }
-    ],
     "require": {
         "php": ">=7.1",
-        "philiplb/crudlex": "0.14.x-dev",
+        "philiplb/crudlex": "0.14.0",
         "symfony/security": "~4.1"
     },
     "require-dev": {
@@ -34,7 +28,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.14.x-dev"
+            "dev-master": "0.15.x-dev"
         }
     },
     "minimum-stability": "dev",

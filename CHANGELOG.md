@@ -1,8 +1,11 @@
 CRUDlexUser Changelog
 =====================
 
-## 0.14.0
+## 0.15.0
 Released: Upcoming
+
+## 0.14.0
+Released: 2018-09-07
 - Attention: Updated the required PHP version to >=7.1
 - Attention: Changed the constructor of the UserProvider to not take directly an AbstractData instance anymore
 - Updated dependencies:
