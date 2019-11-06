@@ -17,5 +17,6 @@ script: vendor/bin/phpunit
 php:
     - 7.1
     - 7.2
+    - 7.3
 after_script:
     - php vendor/bin/coveralls -v
